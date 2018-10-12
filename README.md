@@ -8,8 +8,10 @@ This repository collects together a number of pieces of writing, R code and Imag
 * `phone_camera_compare/` contains data and scripts for an analysis of the ability of two clip on phone lenses to replicate the gap fraction estimates taken by a Nikon D750 DSLR with a sigma 8mm fisheye lens.
 * `hemiphot/` contains code and resources for using Hans ter Steege's port of WinPhot to the R language.
 
-* `hemi_guide.md` is a purely subjective guide on how I think hemispherical photographs should be captured and analysed.
+* `hemiphot_guide.md` is a purely subjective guide on how I think hemispherical photographs should be captured and analysed.
 * `infinity_focus.md` provides a collection of references from the peer-reviewed literature supporting setting the camera focus to infinity when taking canopy photos.
+* `lai_angle_of_view.md` provides references from the peer-reviewed literature supporting cropping hemispherical photos to particular angles of view when estimating canopy parameters.
+
 
 * `fov_func.R` provides two functions used for cropping full-frame hemispherical photographs to different angles of view. To be used in conjunction with ImageJ macros to crop the images and analyse the gap fraction within the crop.
 
