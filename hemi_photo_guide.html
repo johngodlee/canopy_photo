@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>hemi_photo_guide</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style>
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="pandoc_tweak.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <style type="text/css">
+  
+  html, body {
+      margin: 0;
+      padding: 0;
+      max-width: 100%;
+  }
+  
+  body {
+      overflow-x: hidden;
+      width: 90%;
+      margin: 0 auto;
+      padding: 0;
+      border-left: none;
+      border-right: none;
+      color: black;
+      font-family: "Hoefler Text", Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+      font-size: 100%;
+      line-height: 200%;
+  }
+  img {
+      max-width: 90%;
+      display: block;
+      margin: 0 auto;
+  }
+  pre {
+      font-family: monospace;
+      border: 1px solid gray;
+      padding: 0.5em;
+      background-color: #E8E8E8;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  :not(pre) > code{
+      font-family: monospace;
+      border: 1px solid gray; 
+      padding: 0.25em;
+      background-color: #E8E8E8;
+  }
+  blockquote {
+      font-style: italic;
+      text-align: justify;
+      padding: 0.25em;
+      border-left: 2px solid gray;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  hr {
+      border: 0;
+      width: 90%;
+      height: 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  h1 a, h2 a, h3 a, h4 a, h5 a { 
+      text-decoration: none;
+  }
+  h1, h2, h3, h4, h5 {
+      font-weight: bold;
+  /*    border-bottom: 1px dashed rgba(0, 0, 0, 0.2); */
+      color: #262626;
+  }
+  h1 {
+          font-size: 140%;
+  	border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+  }
+  
+  h2 {
+          font-size: 130%;
+  }
+  
+  h3 {
+          font-size: 120%;
+  }
+  
+  h4 {
+          font-size: 110%;
+  }
+  
+  h5 {
+          font-size: 100%;
+  }
+  
+  h1.title {
+          font-size: 200%;
+          font-weight: bold;
+          padding-top: 0.2em;
+          padding-bottom: 0.2em;
+          text-align: left;
+          border: none;
+  }
+  
+  dt code {
+          font-weight: bold;
+  }
+  dd p {
+          margin-top: 0;
+  }
+  
+  #footer {
+          padding-top: 1em;
+          font-size: 70%;
+          color: gray;
+          text-align: center;
+  }
+  
+  table {
+      border: 1px solid black;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      border-collapse: collapse;
+  }
+  
+  table thead {
+      background-color: #E8E8E8;
+  }
+  </style>
+</head>
+<body>
+<h1 id="using-hemispherical-photography-for-estimation-of-forestwoodland-canopy-traits">Using hemispherical photography for estimation of forest/woodland canopy traits</h1>
+<h1 id="taking-hemispherical-photos">Taking hemispherical photos</h1>
+<p>A list of checks for taking good hemispherical photos:</p>
+<ul>
+<li>Take photos under a uniformly overcast sky, ideally before the sun has risen too high in the sky, or just before sunset, this avoids lens flare and helps to increase the contrast between plant material and sky. I find in the morning the photos are generally better due to the quality of the light. At high latitudes you will have more time than in the tropics.</li>
+<li>Ensure that the camera is level on the tripod and the lens is pointing straight up. Use a spirit level attached to the camera hotshoe to do this.</li>
+<li>Adjust the tripod so that the top of the camera lens is 1 m above the ground, or above any understorey vegetation, whichever is higher. I usually find that adjusting the legs of the tripod is easiest, but every tripod is different.</li>
+<li>Turn the camera so the top of the camera body is facing north, bring a compass! This ensures that the top of the captured photo is also facing north, which is necessary for calculating LAI.</li>
+<li>Make use of the visual display on the camera, if there is one, to get a good view of the photo before you take it.</li>
+<li>Set the camera:
+<ul>
+<li>Manual shooting mode</li>
+<li>Manual focus</li>
+<li>Set the focus to infinity.</li>
+<li>Set the exposure compensation to -0.7. This makes thresholding the image easier later on.</li>
+<li>Capture fine jpeg &amp; RAW images at the same time</li>
+<li>Ensure the camera time and date is accurate (this is purely for ease of matching photos to sites).</li>
+<li>Set the Aperture to about 5. This is only a guideline.</li>
+<li>Adjust the ISO and shutter speed so the photo is neutrally exposed but the shutter speed is always over 1/60sec, otherwise you will introduce camera shake when you press the button.</li>
+<li>Take all photos in landscape dimensions, never portait.</li>
+</ul></li>
+<li>Make sure everybody ducks down below the camera when the image is being taken!</li>
+<li>Make sure there is a battery and you have a spare battery.</li>
+<li>Make sure there is an SD card in the camera, and take a spare.</li>
+<li>Cover the lens with the lens cap between photos to prevent accidents.</li>
+</ul>
+<p>A daily kit list for taking hemispherical photos:</p>
+<ul>
+<li>Camera with appropriate fisheye lens</li>
+<li>Lens cap for camera</li>
+<li>Lens cleaning solution and lens cloth</li>
+<li>Tripod</li>
+<li>Fully charged battery for camera</li>
+<li>2 SD cards</li>
+<li>Spirit level hotshoe attachment for camera</li>
+<li>Compass</li>
+<li>Notebook and pencil</li>
+<li>GPS unit</li>
+<li>tape measure &gt; 2 m</li>
+<li>Waterproof bag to cover camera</li>
+</ul>
+<p>An ideal list of products for a high quality DSLR camera setup:</p>
+<ul>
+<li>Nikon D750 DSLR Camera Body</li>
+<li>Sigma 8 mm f3.5 Circular Fisheye EX DG For Nikon Lens</li>
+<li>Hotshoe Fit Spirit Level</li>
+<li>Integral USB SD Card Reader</li>
+<li>2x Sandisk Ultra 30 MB/s SDHC Card 16 GB Class 10</li>
+<li>Hard peli-case to fit equipment in, e.g. Peli-1520 with foam</li>
+<li>A sturdy tripod</li>
+</ul>
+<h1 id="creating-black-and-white-thresholded-images-manually">Creating black and white thresholded images manually</h1>
+<ol type="1">
+<li>Open ImageJClick <code>Apply</code> to binarize the images</li>
+<li><code>File -&gt; Open</code>, then select an image</li>
+<li>Visually inspect the image to see that there isn’t massive amounts of lens flare. If you have lots of lens flare, the photo should be thrown out. This is what lens flare looks like:</li>
+</ol>
+<p><img src="img/lens_flare.jpg" /></p>
+<ol start="4" type="1">
+<li><code>Image -&gt; Type -&gt; 8-bit</code></li>
+<li><code>Image -&gt; Adjust -&gt; Threshold</code>, tick <code>Dark background</code> and manually adjust the image so all sky is entirely red and the branches are grey, or as near as you can get it. Click <code>Apply</code> to binarize the image.</li>
+<li>Save the newly thresholded image as a <code>.tif</code> in a folder called <code>img</code>. The image should have black branches and white sky.</li>
+<li>Rinse and repeat for all images.</li>
+</ol>
+<p>The above process can be automated with a macro, but this assumes that the images are all uniformly exposed.</p>
+<p>This is the macro, which should be saved as a <code>.ijm</code> file and called via <code>ImageJ -&gt; Plugins -&gt; Macros -&gt; Run..</code>. The macro can also be found in <code>hemi_photo_guide/macros/binarize.ijm</code>.</p>
+<pre><code>// Binarize all images with a given algorithm and save
+
+// User inputs
+///////////////////////////////////
+
+input_path = &quot;/Users/johngodlee/Desktop/input/&quot;;
+
+output_path = &quot;/Users/johngodlee/Desktop/output/&quot;
+
+algorithm = &quot;Default&quot;
+
+///////////////////////////////////
+// END user inputs
+
+list = getFileList(input_path);
+
+for (i=0; i&lt;(list.length); i++) {
+
+    open(&quot;&quot;+input_path+list[i]+&quot;&quot;);
+
+    file_name = getInfo(&quot;image.filename&quot;);
+
+    run(&quot;8-bit&quot;);
+
+    setAutoThreshold(algorithm);
+    setOption(&quot;BlackBackground&quot;, false);
+    run(&quot;Convert to Mask&quot;);
+
+    saveAs(&quot;tif&quot;, &quot;&quot;+output_path+file_name+&quot;&quot;);
+
+    image_id = getImageID();
+    selectImage(image_id);
+    close();
+}</code></pre>
+<p>I find that the <a href="http://www.ktl.elf.stuba.sk/study/vacso/Zadania-Cvicenia/Cvicenie_3/TimA2/Huang_E016529624.pdf"><code>Huang</code></a> algorithm normally works well, but you should experiment with different algorithms to find the one which works best under different conditions. <code>Default</code> is also widely appropriate for hemispherical photos.</p>
+<p>An alternative to simple thresholding of 8-bit greyscale images is to use a colour thresholding technique. Plant material often has very little blue in it, while the sky generally has more, so you can threshold using only the blue channel of the image with this macro, also found in <code>hemi_photo_guide/macros/binarize_blue_channel.ijm</code>:</p>
+<pre><code>// User inputs
+///////////////////////////////////
+
+input_path = &quot;/Users/johngodlee/Desktop/input/&quot;;
+
+output_path = &quot;/Users/johngodlee/Desktop/output/&quot;;
+
+algorithm = &quot;Default&quot;
+
+///////////////////////////////////
+// END user inputs
+
+
+list = getFileList(input_path);
+
+
+for (i=0; i&lt;(list.length); i++){
+
+    open(&quot;&quot;+input_path+list[i]+&quot;&quot;);
+
+    file_name = getInfo(&quot;image.filename&quot;);
+
+    run(&quot;Split Channels&quot;);
+
+    selectWindow(file_name+&quot; (blue)&quot;);
+
+    setAutoThreshold(algorithm);
+
+    run(&quot;Convert to Mask&quot;);
+
+    saveAs(&quot;tif&quot;, &quot;&quot;+output_path+&quot;blue_&quot;+file_name+&quot;&quot;);
+
+    close(&quot;*&quot;);
+}</code></pre>
+<h1 id="calculating-gap-fraction-with-imagej">Calculating gap fraction with ImageJ</h1>
+<p>Gap fraction is the percentage of the image covered by sky.</p>
+<p>This process is fairly simple. Basically, from the binarized <code>.tif</code> images you made earlier, you just count the number of pixels which are sky in the image, i.e. white in the thresholded image, then divide by the total number of pixels in the image. It’s slightly more complicated when the image is a circle within a larger frame, but not much.</p>
+<p>To do this manually:</p>
+<ol type="1">
+<li>Open ImageJ</li>
+<li><code>File -&gt; Open</code>, then select a binarized <code>.tif</code> image</li>
+<li><code>Edit -&gt; Invert</code> to invert the colours</li>
+<li><code>Analyze -&gt; Analyze Particles..</code>,:
+<ul>
+<li><code>Size (pixel^2)</code> = 0-infinity</li>
+<li><code>Circularity</code> = 0-1</li>
+<li><code>Show</code> = Nothing</li>
+<li>Check <code>Summarize</code></li>
+</ul></li>
+<li>The results should appear in a table, the gap fraction value is <code>%Area</code>.</li>
+<li>Rinse and repeat for all images.</li>
+</ol>
+<p>This macro performs the same process but for a folder of images and exports a <code>.csv</code> spreadsheet file of the results. Remember to change the user inputs to point to where you would like images to be opened from and the spreadsheet saved to. The macro can also be found in <code>hemi_photo_guide/macros/gap_frac_image.ijm</code>:</p>
+<pre><code>// Calculate the gap fraction of a full image
+
+// User inputs
+///////////////////////////////////
+
+input_path = &quot;/Users/johngodlee/Desktop/input/&quot;;
+
+output_path = &quot;/Users/johngodlee/Desktop/output/&quot;;
+
+binarize_first = &quot;TRUE&quot;
+// Only set to &quot;FALSE&quot; if a binarized `.tif` is used
+
+algorithm = &quot;Default&quot;
+
+///////////////////////////////////
+// END user inputs
+
+
+list = getFileList(input_path);
+
+for (i=0; i&lt;(list.length); i++) {
+
+    open(&quot;&quot;+input_path+list[i]+&quot;&quot;);
+
+    if (binarize_first==&quot;TRUE&quot;){
+        run(&quot;8-bit&quot;);
+        setAutoThreshold(algorithm);
+        setOption(&quot;BlackBackground&quot;, false);
+        run(&quot;Convert to Mask&quot;);
+    }
+
+    run(&quot;Invert&quot;);
+
+    file_name = getInfo(&quot;image.filename&quot;);
+
+    run(&quot;Analyze Particles...&quot;, &quot;summarize&quot;);
+
+    image_id = getImageID();
+    selectImage(image_id);
+    close();
+
+    roiManager(&quot;reset&quot;);
+}
+
+selectWindow(&quot;Summary&quot;); 
+saveAs(&quot;Results&quot;, &quot;&quot;+output_path+&quot;results.csv&quot;); 
+run(&quot;Close&quot;);</code></pre>
+<p>The process is similar for a circular image such as that taken with a full frame camera and a fisheye lens, except you draw a circle selection to exclude the black uninformative bits of the image before running <code>Analyze Particles...</code>. The macro looks like this and can also be found in <code>hemi_photo_guide/macros/gap_frac_circle.ijm</code>:</p>
+<pre><code>// Calculate the gap fraction of a circular selection of an image
+
+// User inputs
+///////////////////////////////////
+
+input_path = &quot;/Users/johngodlee/Desktop/input/&quot;;
+
+output_path = &quot;/Users/johngodlee/Desktop/output/&quot;;
+
+circle_diam = 3925
+
+binarize_first = &quot;TRUE&quot;
+// Only set to &quot;FALSE&quot; if a binarized `.tif` is used
+
+algorithm = &quot;Default&quot;
+
+///////////////////////////////////
+// END user inputs
+
+
+list = getFileList(input_path);
+
+for (i=0; i&lt;(list.length); i++) {
+
+    open(&quot;&quot;+input_path+list[i]+&quot;&quot;);
+
+    if (binarize_first==&quot;TRUE&quot;){
+        run(&quot;8-bit&quot;);
+        setAutoThreshold(&quot;Default&quot;);
+        setOption(&quot;BlackBackground&quot;, false);
+        run(&quot;Convert to Mask&quot;);
+    }
+
+    run(&quot;Invert&quot;);
+
+    makeOval((getWidth/2) - (0.5 * circle_diam),
+        (getHeight/2) - (0.5 * circle_diam),
+        circle_diam,
+        circle_diam);
+
+    file_name = getInfo(&quot;image.filename&quot;);
+
+    run(&quot;Analyze Particles...&quot;, &quot;summarize&quot;);
+
+    image_id = getImageID();
+    selectImage(image_id);
+    close();
+    
+    roiManager(&quot;reset&quot;);
+}
+
+selectWindow(&quot;Summary&quot;); 
+saveAs(&quot;Results&quot;, &quot;&quot;+output_path+&quot;results.csv&quot;); 
+run(&quot;Close&quot;);
+}
+
+saveAs(&quot;Results&quot;, &quot;&quot;+output_path+&quot;gap_frac_results.xls&quot;);</code></pre>
+<p>The circular diameter of the image to fill <code>circle_diam</code> can be measured in ImageJ by selecting <code>Straight Line</code> from the toolbar then drawing a straight line across the centre of the circular image. Then select <code>Analyze -&gt; Measure</code> to get the Length of the line in the Results table. Alternatively, read below if you would like to crop the circular image to a particular angle of view, to exclude parts of the image closer to the ground.</p>
+<h1 id="cropping-a-circular-image">Cropping a circular image</h1>
+<p>Sometimes, it’s desirable to crop a hemispherical photo to a smaller circle with a known angle of view. Fisheye lenses have different projection functions which map the curved image onto a flat surface, much like a map projection. Here is a list of common projection functions for different lenses:</p>
+<ul>
+<li>Equisolid (equal area) - <code>R = 2f*sin(θ/2)</code></li>
+<li>Equidistant - <code>R = f * θ</code></li>
+<li>Orthographic - <code>R = f * sin(θ)</code></li>
+<li>Thoby fisheye - <code>R = 1.47 * f * sin(0.713 * θ)</code></li>
+</ul>
+<p>Where <code>R</code> is the radial position of a point on the image on the sensor, <code>f</code> is the focal length of the lens, and <code>θ</code> is the angle in radians of the desired angular radius of the cropped image. Here is a diagram I made of what I think those values mean, roughly.</p>
+<p><img src="img/fov_diagram.png" /></p>
+<p>The lens I use (Sigma 8 mm) uses an equisolid projection, so I can use the equation above to create a function in the R programing language which will give me the radius of the circle in pixels for a desired <code>θ</code>. The function can also be found in <code>hemi_photo_guide/fov_func.R</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>fov.px &lt;-<span class="st"> </span><span class="cf">function</span>(deg_theta, focal_length_mm, pixel_pitch_um){</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="kw">require</span>(NISTunits)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    </span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="co"># Convert degrees of theta to radians</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    rads_theta &lt;-<span class="st"> </span><span class="kw">NISTdegTOradian</span>(deg_theta) </span>
+<span id="cb5-6"><a href="#cb5-6"></a>    </span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="co"># Calculate radius of circle drawn by angle of view </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="co"># (rads_theta and max_rads_theta) in mm projected onto the sensor plane</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>    R &lt;-<span class="st">  </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>focal_length_mm <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(rads_theta <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb5-10"><a href="#cb5-10"></a>    </span>
+<span id="cb5-11"><a href="#cb5-11"></a>    <span class="co"># Calculate the px per mm on the sensor, i.e. the pixel pitch</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>    sensor_px_per_mm_flat &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>pixel_pitch_um <span class="op">*</span><span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>    </span>
+<span id="cb5-14"><a href="#cb5-14"></a>    <span class="co"># Multiply the mm radius of the desired circle by the </span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>    <span class="co"># number of pixels per mm on the sensor, to get the number </span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>    <span class="co"># of pixels radius of the desired circle</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>    pixels_for_theta &lt;-<span class="st"> </span>R <span class="op">*</span><span class="st"> </span>sensor_px_per_mm_flat</span>
+<span id="cb5-18"><a href="#cb5-18"></a>    </span>
+<span id="cb5-19"><a href="#cb5-19"></a>    <span class="co"># Print result</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>    <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Radius of circle:&quot;</span>, <span class="kw">round</span>(pixels_for_theta, <span class="dt">digits =</span> <span class="dv">0</span>), <span class="st">&quot;px&quot;</span>))</span>
+<span id="cb5-21"><a href="#cb5-21"></a>}</span></code></pre></div>
+<p>The code below shows how to run the function:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Test of function</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">fov.px</span>(<span class="dt">deg_theta =</span> <span class="dv">90</span>, <span class="dt">focal_length_mm =</span> <span class="dv">8</span>, <span class="dt">pixel_pitch_um =</span> <span class="fl">5.95</span>)</span></code></pre></div>
+<p>The pixel pitch of the sensor is the real distance (in micrometres) from the centre of one pixel on the sensor to the centre of the next, in my case it’s 5.95 um. This information can generally be found by querying the technical specifications for the camera.</p>
+<p>Similarly, I made a function to calculate the degrees <code>θ</code> of an already cropped circular image, by solving the equation for <code>θ</code>. The functions can also be found in <code>hemi_photo_guide/fov_func.R</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>fov.theta &lt;-<span class="st"> </span><span class="cf">function</span>(prop_crop, full_circle_radius_px, focal_length_mm, pixel_pitch_um){</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="kw">require</span>(NISTunits)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    </span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="co"># Calculate the number of pixels in the radius of the crop</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    px_crop &lt;-<span class="st"> </span>full_circle_radius_px <span class="op">*</span><span class="st"> </span>prop_crop</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    </span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="co"># Calculate the radius of the </span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    theta &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">asin</span>(((pixel_pitch_um <span class="op">*</span><span class="st"> </span>px_crop) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>focal_length_mm <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>)))</span>
+<span id="cb7-9"><a href="#cb7-9"></a>    </span>
+<span id="cb7-10"><a href="#cb7-10"></a>    deg_theta &lt;-<span class="st"> </span><span class="kw">NISTradianTOdeg</span>(theta)</span>
+<span id="cb7-11"><a href="#cb7-11"></a>    </span>
+<span id="cb7-12"><a href="#cb7-12"></a>    <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Angle of view: &quot;</span>, <span class="kw">round</span>(deg_theta, <span class="dt">digits =</span> <span class="dv">2</span>), <span class="st">&quot;°&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))</span>
+<span id="cb7-13"><a href="#cb7-13"></a>}</span></code></pre></div>
+<p>These values can be used in the ImageJ macro <code>gap_frac_circle.ijm</code> to alter <code>circle_diam</code> to make a circular selection of the image of a certain view angle.</p>
+<h1 id="calculating-leaf-area-index">Calculating Leaf Area Index</h1>
+<p>This part relies mostly on code written by <a href="https://github.com/naturalis/Hemiphot">Hans Ter Steege’s HemiPhot translation</a>, which ports WinPhot into the R language. The code includes functions for thresholding and binarizing images, but I prefer to do this step in ImageJ prior to aalysing the images in R, because I feel like I have more power over how the images are thresholded this way.</p>
+<p>The first thing to do is create an image (<code>white_image.jpg</code>) in Photoshop like the one below, which has a white circle and black background the same size as my hemispherical images. This is so you can find the pixel diameter of the image for the calculations. Alternatively, just use the pixel diameter used in the ImageJ circular cropping macros:</p>
+<p><img src="img/white_image.jpg" /></p>
+<ol type="1">
+<li><p>Open RStudio.</p></li>
+<li><p>Open a new script (<code>File -&gt; New File -&gt; R Script</code>)</p></li>
+<li><p>Save the script in a folder above the images folder:</p></li>
+<li><p>Enter the following preamble into the R script:</p></li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Set working directory to location of thresholded images</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">setwd</span>(<span class="st">&quot;LOCATION_OF_ANALYSIS&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Source the functions used to calculate stuff</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">source</span>(<span class="st">&quot;hemiphot.R&quot;</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Packages</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">library</span>(jpeg)</span></code></pre></div>
+<ol start="5" type="1">
+<li>Add <code>white_image.jpg</code> to the same folder where the thresholded images are found</li>
+<li>Read in all the previously thresholded and binarized <code>.tif</code> images and create an empty data frame which will later be filled with canopy trait statistics like LAI and canopy openness.</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># List all images in the directory</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>all_images &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;img/&quot;</span>, <span class="dt">pattern =</span> <span class="st">&quot;.tif&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># How many images</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>img_length =<span class="st"> </span><span class="kw">length</span>(all_images)</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co"># Create empty dataframe, 6x7 and fill it with zeroes</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>all_data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dt">data =</span> <span class="dv">0</span>, <span class="dt">nrow =</span> img_length, <span class="dt">ncol =</span> <span class="dv">7</span>))</span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="kw">names</span>(all_data) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;File&quot;</span>, <span class="st">&quot;CanOpen&quot;</span>, <span class="st">&quot;LAI&quot;</span>, <span class="st">&quot;DirectAbove&quot;</span>, </span>
+<span id="cb9-10"><a href="#cb9-10"></a>    <span class="st">&quot;DiffAbove&quot;</span>, <span class="st">&quot;DirectBelow&quot;</span>, <span class="st">&quot;DiffBelow&quot;</span>)</span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co"># Fill first column with image names</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>all_data[,<span class="dv">1</span>] =<span class="st"> </span>all_images</span></code></pre></div>
+<ol start="7" type="1">
+<li>Read in the reference image (<code>white_img.jpg</code>) as a matrix of pixel values:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>white_img &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="st">&quot;img/white_image.jpg&quot;</span>, <span class="dt">native =</span> F)</span></code></pre></div>
+<ol start="8" type="1">
+<li>Set some parameters for the location the photos are being taken. Approximate location (0.1 degrees latitude) is good enough for our purposes. Note that the values below are for somewhere in Africa and should be changed:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>location.latitude   =<span class="st"> </span><span class="dv">-15</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>location.altitude   =<span class="st"> </span><span class="dv">200</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>location.day        =<span class="st"> </span><span class="dv">30</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>location.days       =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">15</span>,<span class="dv">360</span>,<span class="dv">30</span>)   <span class="co"># roughly the middle of each month of the year </span></span></code></pre></div>
+<ol start="9" type="1">
+<li>Set some parameters for the images, cropping them to a circle and setting the threshold. Even if the images have been thresholded already, thresholding them again won’t change anything. These parameters are ones I have used on my camera (Nikon D750 with Sigma 8 mm equisolid fisheye lens), so may need to be changed depending on your equipment:</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">## Image parameters</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">### Drawing circles and identifying the image centre point</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>hemi_dim &lt;-<span class="st"> </span><span class="kw">dim</span>(white_img)</span>
+<span id="cb12-5"><a href="#cb12-5"></a>radius &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">rowSums</span>(white_img[,,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.4</span>) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">### determine using a single image and fill in here for batch processing</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>location.cx         =<span class="st"> </span>(hemi_dim[<span class="dv">2</span>] <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)  <span class="co"># x coordinate of center of image</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>location.cy         =<span class="st"> </span>(hemi_dim[<span class="dv">1</span>] <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)  <span class="co"># y coordinate of center image</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>location.cr         =<span class="st"> </span>radius  <span class="co"># radius of circle</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>location.threshold  =<span class="st"> </span><span class="fl">0.42</span></span></code></pre></div>
+<ol start="10" type="1">
+<li>Set some atmospheric parameters. I’ve loosely estimated these for a location in Angola where I work, but by no means is it scientific. I would not have much confidence in the statistics generated using these parameters, namely <code>DirectAbove</code>, <code>DiffAbove</code>, <code>DirectBelow</code> and <code>DiffBelow</code>.</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># atmospheric parameters</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">## Atmospheric transmissivity</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">## Normally set at 0.6, but can vary between 0.4-0.6 in the tropics</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>location.tau =<span class="st"> </span><span class="fl">0.6</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">## Amount of direct light that is used as diffuse light in the Uniform Ovecast Sky (UOC)</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>location.uoc =<span class="st"> </span><span class="fl">0.15</span></span></code></pre></div>
+<ol start="11" type="1">
+<li>Run a big for loop to calculate the statistics for each photo</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>img_length){</span>
+<span id="cb14-2"><a href="#cb14-2"></a>    <span class="co">## read file</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>    image &lt;-<span class="st"> </span><span class="kw">readJPEG</span>(<span class="kw">paste</span>(<span class="st">&quot;test_img/&quot;</span>, all_images[i], <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), <span class="dt">native =</span> F)</span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a>    <span class="co">## conver to Hemi image</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>    image &lt;-<span class="st"> </span><span class="kw">Image2Hemiphot</span>(image)</span>
+<span id="cb14-7"><a href="#cb14-7"></a></span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="co">## set circle parameters</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>    image &lt;-<span class="st"> </span><span class="kw">SetCircle</span>(image, <span class="dt">cx =</span> location.cx, <span class="dt">cy =</span> location.cy, <span class="dt">cr =</span> location.cr)</span>
+<span id="cb14-10"><a href="#cb14-10"></a></span>
+<span id="cb14-11"><a href="#cb14-11"></a>    <span class="co">## select blue channel</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>    image &lt;-<span class="st"> </span><span class="kw">SelectRGB</span>(image, <span class="st">&quot;B&quot;</span>)</span>
+<span id="cb14-13"><a href="#cb14-13"></a></span>
+<span id="cb14-14"><a href="#cb14-14"></a>    <span class="co">#threshold</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a>    image &lt;-<span class="st"> </span><span class="kw">ThresholdImage</span>(<span class="dt">im =</span> image, <span class="dt">th =</span> location.threshold, <span class="dt">draw.image =</span> F)</span>
+<span id="cb14-16"><a href="#cb14-16"></a></span>
+<span id="cb14-17"><a href="#cb14-17"></a>    <span class="co"># canopy openness</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a>    gap.fractions &lt;-<span class="st"> </span><span class="kw">CalcGapFractions</span>(image)</span>
+<span id="cb14-19"><a href="#cb14-19"></a>    all_data[i,<span class="dv">2</span>] =<span class="st"> </span><span class="kw">CalcOpenness</span>(<span class="dt">fractions =</span> gap.fractions)</span>
+<span id="cb14-20"><a href="#cb14-20"></a></span>
+<span id="cb14-21"><a href="#cb14-21"></a>    <span class="co">## calculate LAI according to Licor&#39;s LAI Analyzer</span></span>
+<span id="cb14-22"><a href="#cb14-22"></a>    all_data[i,<span class="dv">3</span>] =<span class="st"> </span><span class="kw">CalcLAI</span>(<span class="dt">fractions =</span> gap.fractions)</span>
+<span id="cb14-23"><a href="#cb14-23"></a></span>
+<span id="cb14-24"><a href="#cb14-24"></a>    <span class="co">## Photosynthetic Photon Flux Density (PPDF, umol m-1 s-1) P</span></span>
+<span id="cb14-25"><a href="#cb14-25"></a>    rad &lt;-<span class="st"> </span><span class="kw">CalcPAR.Day</span>(<span class="dt">im =</span> image,</span>
+<span id="cb14-26"><a href="#cb14-26"></a>        <span class="dt">lat =</span> location.latitude, <span class="dt">d =</span> location.days,</span>
+<span id="cb14-27"><a href="#cb14-27"></a>        <span class="dt">tau =</span> location.tau, <span class="dt">uoc =</span> location.uoc,</span>
+<span id="cb14-28"><a href="#cb14-28"></a>                                        <span class="dt">draw.tracks =</span> F, <span class="dt">full.day =</span> F)</span>
+<span id="cb14-29"><a href="#cb14-29"></a>    all_data[i,<span class="dv">4</span>] =<span class="st"> </span>rad[<span class="dv">1</span>]</span>
+<span id="cb14-30"><a href="#cb14-30"></a>    all_data[i,<span class="dv">5</span>] =<span class="st"> </span>rad[<span class="dv">2</span>]</span>
+<span id="cb14-31"><a href="#cb14-31"></a>    all_data[i,<span class="dv">6</span>] =<span class="st"> </span>rad[<span class="dv">3</span>]</span>
+<span id="cb14-32"><a href="#cb14-32"></a>    all_data[i,<span class="dv">7</span>] =<span class="st"> </span>rad[<span class="dv">4</span>]</span>
+<span id="cb14-33"><a href="#cb14-33"></a>}</span></code></pre></div>
+<ol start="12" type="1">
+<li>Finally, look at the output, which is stored in <code>all_data</code></li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>all_data</span></code></pre></div>
+<p>There are many other functions in <code>hemiphot.R</code> and I recommend reading through them along with the documentation to see what is right for your needs.</p>
+</body>
+</html>

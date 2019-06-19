@@ -304,13 +304,16 @@ fov.px <- function(deg_theta, focal_length_mm, pixel_pitch_um){
 	# Convert degrees of theta to radians
 	rads_theta <- NISTdegTOradian(deg_theta) 
 	
-	# Calculate radius of circle drawn by angle of view (rads_theta and max_rads_theta) in mm projected onto the sensor plane
+	# Calculate radius of circle drawn by angle of view 
+	# (rads_theta and max_rads_theta) in mm projected onto the sensor plane
 	R <-  2 * focal_length_mm * sin(rads_theta / 2)
 	
 	# Calculate the px per mm on the sensor, i.e. the pixel pitch
 	sensor_px_per_mm_flat <- 1/pixel_pitch_um * 1000
 	
-	# Multiply the mm radius of the desired circle by the number of pixels per mm on the sensor, to get the number of pixels radius of the desired circle
+	# Multiply the mm radius of the desired circle by the 
+	# number of pixels per mm on the sensor, to get the number 
+	# of pixels radius of the desired circle
 	pixels_for_theta <- R * sensor_px_per_mm_flat
 	
 	# Print result
@@ -353,7 +356,7 @@ This part relies mostly on code written by [Hans Ter Steege's HemiPhot translati
 
 The first thing to do is create an image (`white_image.jpg`) in Photoshop like the one below, which has a white circle and black background the same size as my hemispherical images. This is so you can find the pixel diameter of the image for the calculations. Alternatively, just use the pixel diameter used in the ImageJ circular cropping macros:
 
-![](img/white_img.jpg)
+![](img/white_image.jpg)
 
 1. Open RStudio.
 2. Open a new script (`File -> New File -> R Script`)
@@ -384,7 +387,8 @@ img_length = length(all_images)
 
 # Create empty dataframe, 6x7 and fill it with zeroes
 all_data = data.frame(matrix(data = 0, nrow = img_length, ncol = 7))
-names(all_data) = c("File", "CanOpen", "LAI", "DirectAbove", "DiffAbove", "DirectBelow", "DiffBelow")
+names(all_data) = c("File", "CanOpen", "LAI", "DirectAbove", 
+	"DiffAbove", "DirectBelow", "DiffBelow")
 # Fill first column with image names
 all_data[,1] = all_images
 ```
@@ -424,7 +428,8 @@ location.threshold  = 0.42
 
 ```r
 # atmospheric parameters
-## Atmospheric transmissivity - Normally set at 0.6, but can vary between 0.4-0.6 in the tropics
+## Atmospheric transmissivity
+## Normally set at 0.6, but can vary between 0.4-0.6 in the tropics
 location.tau = 0.6
 
 ## Amount of direct light that is used as diffuse light in the Uniform Ovecast Sky (UOC)
