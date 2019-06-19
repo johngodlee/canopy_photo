@@ -5,7 +5,9 @@
 
 input_path = "/Users/johngodlee/Desktop/input/";
 
-output_path = "/Users/johngodlee/Desktop/output/";
+output_path = "/Users/johngodlee/Desktop/output/"
+
+algorithm = "Default"
 
 ///////////////////////////////////
 // END user inputs
@@ -20,11 +22,11 @@ for (i=0; i<(list.length); i++) {
 
 	run("8-bit");
 
-	setAutoThreshold("Default");
+	setAutoThreshold(algorithm);
 	setOption("BlackBackground", false);
 	run("Convert to Mask");
 
-	saveAs("Jpeg", ""+output_path+file_name+"");
+	saveAs("tif", ""+output_path+file_name+"");
 
 	image_id = getImageID();
 	selectImage(image_id);

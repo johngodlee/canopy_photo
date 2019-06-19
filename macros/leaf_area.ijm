@@ -10,9 +10,14 @@ output_path = "/Users/johngodlee/Desktop/output/";
 
 dpi = 300;
 
-min_obj_size = 0.7;
+min_obj_size = 0;
 
 max_obj_size = "Infinity"
+
+binarize_first = "TRUE"
+// Only set to "FALSE" if a binarized `.tif` is used
+
+algorithm = "Default"
 
 ///////////////////////////////////
 // END user inputs
@@ -30,22 +35,23 @@ for (i=0; i<(list.length); i++) {
 
 	run("8-bit");
 
-	setAutoThreshold("Default");
-	setOption("BlackBackground", false);
-	run("Convert to Mask");
+	if (binarize_first=="TRUE"){
+		setAutoThreshold(algorithm);
+		setOption("BlackBackground", false);
+		run("Convert to Mask");
+	}
 
 	run("Set Scale...", "distance=px_cm known=1 pixel=1 unit=cm global");
 
-	run("Analyze Particles...", "size=min_obj_size-max_obj_size show=[Bare Outlines] display add");
+	run("Analyze Particles...", "size=min_obj_size-max_obj_size show=[Outlines] display add");
 
 	setOption("Display Label", true);
 
-	saveAs("Results", ""+output_path+file_name+".xls");
+	saveAs("Results", ""+output_path+file_name+".csv");
 	run("Clear Results");
 
 	saveAs("Jpeg", ""+output_path+file_name+"");
 
-	image_id = getImageID();
-	selectImage(image_id);
-	close();
+	close("*");
 }
+

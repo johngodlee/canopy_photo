@@ -5,6 +5,8 @@ input_path = "/Users/johngodlee/Desktop/input/";
 
 output_path = "/Users/johngodlee/Desktop/output/";
 
+algorithm = "Default"
+
 ///////////////////////////////////
 // END user inputs
 
@@ -13,23 +15,20 @@ list = getFileList(input_path);
 
 
 for (i=0; i<(list.length); i++){
+
 	open(""+input_path+list[i]+"");
 
-        image_name = getTitle();
+	file_name = getInfo("image.filename");
 
 	run("Split Channels");
 
-	selectWindow(image_name+" (blue)");
+	selectWindow(file_name+" (blue)");
 
-	setAutoThreshold("Huang dark");
+	setAutoThreshold(algorithm);
 
 	run("Convert to Mask");
 
-	saveAs("Jpeg", output_path+"blue_"+image_name);
-
-	run("Analyze Particles...", "summarize add");
+	saveAs("tif", ""+output_path+"blue_"+file_name+"");
 
 	close("*");
 }
-
-saveAs("Results", ""+output_path+"results.xls");

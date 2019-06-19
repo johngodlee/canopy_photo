@@ -9,6 +9,11 @@ output_path = "/Users/johngodlee/Desktop/output/";
 
 circle_diam = 3925
 
+binarize_first = "TRUE"
+// Only set to "FALSE" if a binarized `.tif` is used
+
+algorithm = "Default"
+
 ///////////////////////////////////
 // END user inputs
 
@@ -19,9 +24,14 @@ for (i=0; i<(list.length); i++) {
 
 	open(""+input_path+list[i]+"");
 
-	run("8-bit");
-	setAutoThreshold("Huang dark");
-	run("Convert to Mask");
+	if (binarize_first=="TRUE"){
+		run("8-bit");
+		setAutoThreshold("Default");
+		setOption("BlackBackground", false);
+		run("Convert to Mask");
+	}
+
+	run("Invert");
 
 	makeOval((getWidth/2) - (0.5 * circle_diam),
 		(getHeight/2) - (0.5 * circle_diam),
@@ -30,13 +40,15 @@ for (i=0; i<(list.length); i++) {
 
 	file_name = getInfo("image.filename");
 
-	run("Analyze Particles...", "summarize add");
-
-	saveAs("Jpeg", ""+output_path+file_name+"");
+	run("Analyze Particles...", "summarize");
 
 	image_id = getImageID();
 	selectImage(image_id);
 	close();
+	
+	roiManager("reset");
 }
 
-saveAs("Results", ""+output_path+"results.xls");
+selectWindow("Summary"); 
+saveAs("Results", ""+output_path+"results.csv"); 
+run("Close");
