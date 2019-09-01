@@ -17,7 +17,7 @@ A list of checks for taking good hemispherical photos:
 	* Set the exposure compensation to -0.7. This makes thresholding the image easier later on.
 	* Capture fine jpeg & RAW images at the same time
 	* Ensure the camera time and date is accurate (this is purely for ease of matching photos to sites).
-	* Set the Aperture to about 5. This is only a guideline.
+	* Set the Aperture to about 7. This is only a guideline.
 	* Adjust the ISO and shutter speed so the photo is neutrally exposed but the shutter speed is always over 1/60sec, otherwise you will introduce camera shake when you press the button.
 	* Take all photos in landscape dimensions, never portait.
 * Make sure everybody ducks down below the camera when the image is being taken!
