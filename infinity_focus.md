@@ -4,7 +4,7 @@ My assumption has always been that when taking hemispherical photos of forest ca
 
 This first paper only says that non-DSLR cameras should have the focus set to infinity, either that or it's confusingly written.
 
-> All camera internalsoftware filters (e.g. sharpen the picture) need to be turned off. For non-DSLR cameras the "Fish-Eye setting" means that the zoom is fixed at the widest angle and __focus is set to infinity__.
+> All camera internal software filters (e.g. sharpen the picture) need to be turned off. For non-DSLR cameras the "Fish-Eye setting" means that the zoom is fixed at the widest angle and __focus is set to infinity__.
 > 
 > -- Melrose et al. 2012
 
