@@ -1,87 +1,72 @@
 \documentclass{article}
 
 \usepackage{mynotes}
+\usepackage{framed}
 
 \renewcommand{\lstlistingname}{Code}
 
+\newcommand\menu[1]{\texttt{\color{blue}#1}}
+\newcommand\file[1]{\texttt{\underline{#1}}}
+
 \title{Hemispherical photography for the estimation of woodand canopy traits}
-\date{}
+\date{2020-07-22}
 \author{John L. Godlee}
-
-%* Write notes on an optimal LAI estimation protocol for the SEOSAW dataset - See notes in thesis directory.
-%	* What measurements of the structural diversity of trees in a miombo woodland?
-%		* Crown dimensions in 2 perpendicular directions.
-%		* Crown depth, from highest leaf to lowest branch node
-%		* Height
-%		* DBH
-%		* _Number of branches_
-%		* _Branch ordering_
-
-% Table of checklists in front matter
 
 \begin{document}
 
-\maketitle{}
-\tableofcontents{}
-\newpage{}
+\maketitle
 
-\section{Introduction}
-
-This guide serves as an introduction to the use of hemispherical photography for estimating woodland tree canopy variables in ecological research. Much of this guide has been informed by personal fieldwork conducted by the authors, along with scattered references found throughout the scientific and practitioner literature. This guide is an attempt to bring those ideas into a cohesive teaching resource which assumes little prior knowledge of the technique. This guide focuses on practical application of hemispherical photography, rather than being an in-depth analysis of the science of optics. It is designed to provide novice users with the means to obtain robust results quickly for use in their research. The manual contains a number of checklists for fieldwork which the user is encouraged to adapt for their own purposes and take into the field to serve as a reminder of best practice. Analysis of hemispherical photographs is covered with an effort to stick to free, open-source and actively maintained software in order to maximise accessibility, and to ensure that the guide remains relevant into the future.
+This guide serves as an introduction to the use of hemispherical photography for estimating woodland tree canopy variables in ecological research. Much of this guide has been informed by personal fieldwork, along with scattered references found throughout the scientific and practitioner literature. This guide is an attempt to bring those ideas into a cohesive resource which assumes little prior knowledge of the technique. This guide focuses on practical application of hemispherical photography, rather than being an in-depth analysis of the science of optics. It is designed to provide novice users with the means to obtain robust results quickly for use in their research. The manual contains a number of checklists for fieldwork which the user is encouraged to adapt for their own purposes and take into the field to serve as a reminder of best practice. Analysis of hemispherical photographs is covered with an effort to stick to free, open-source, and actively maintained software in order to maximise accessibility, and to ensure that the guide remains relevant into the future.
 
 \section{What is hemispherical photography?}
 
-Hemispherical photography is a technique used to estimate plant canopy geometry, using an extreme wide-angle or fisheye camera lens. Hemispherical photography is most commonly used to estimate the canopy cover of trees in a forest or woodland setting \citep{}, and this is the application which is focused on in this guide. There are however, many other creative applications of this technique. For example, hemispherical photography may also be used to estimate the ground cover of agricultural crops, by pointing the camera downwards instead of upwards \citep{}.
+Hemispherical photography is a technique used to estimate plant canopy traits, using an extreme wide-angle or fisheye camera lens. Hemispherical photography is most commonly used to estimate the canopy cover of trees in a forest or woodland setting \citep{Seidel2011, Macfarlane2014}, and this is the focus of the current guide. There are however, many other creative applications of this technique. For example, hemispherical photography may also be used to estimate the ground cover of agricultural crops, by pointing the camera downwards instead of upwards \citep{Demarez2008}.
 
 \section{Measurements of woodland tree canopies}
 
 Hemispherical photographs can be analysed in multiple ways to provide different metrics related to the form of the woodland canopy. All these metrics are related and rely fundamentally on the classification of pixels in the photo image into either plant material or sky. Different metrics are used depending on the convention of the chosen field of research and according to the research question being asked. Some common metrics are:
 
 \begin{itemize}
-	\item{Gap fraction}
-	\item{Direct/indirect/global site factor}
-	\item{Leaf/Plant Area Index (LAI/PAI)}
-	\item{Canopy cover}
+	\item{Gap fraction (site factor) - Proportional coverage of plant canopy material as viewed from a single point with some given angular field of view (\%).}
+	\item{Canopy cover - Proportional coverage of plant canopy material per unit ground area covered (\%).}
+	\item{Leaf/Plant Area Index (LAI/PAI) - Area of leaf (LAI) or plant (PAI) per unit ground area (m\textsuperscript{2} m\textsuperscript{-2}).}
 \end{itemize}
-
-\subsection{Gap fraction}
-
-Canopy gap fraction is simply the ratio of plant material to non-plant material.e 
-
-\subsection{Direct/indirect/global site factor}
-
-\subsection{Leaf/Plant Area Index (LAI/PAI)}
-
-\subsection{Canopy cover}
 
 \section{Hemispherical photos in the field}
 
 \subsection{Capturing informative photos}
 
-Taking hemispherical photos under field conditions requires the balancing of many different requirements. Images must be properly exposed and without visual aberrations which would otherwise make analysis difficult. Confident use of the many settings available on a modern DSLR camera is necessary to adjust for changing environmental conditions to gather images which are consistent, which makes further analysis easier and the results more robust.
+Taking hemispherical photos under field conditions which are representative of the woodland canopy requires the careful balancing of camera settings. Images must be properly exposed and without visual aberrations which would otherwise bias analysis. Confident use of the many settings available on a modern DSLR camera is necessary to adjust for environmental conditions which may change throughout the day to gather consistent and informative images.
 
-Some common issues:
+Some common issues which create bias in results:
 
 \begin{itemize}
-	\item{Lens flare - Bright sunlight reflects within the lens mechanism due to material imperfections in the lens glass, causing haze and starburst artifacts in the image.}
-	\item{Blooming - An oversaturated part of the image bleeds over into other pixels of the image sensor during image capture. This is a very common problem in hemispherical photography, requiring careful adjustment of the image exposure to limit its impact.}
-	\item{Obstructions between camera and tree canopy - Herbaceous understorey material, manmade objects, people etc. can all contribute to an inaccurate estimate of the amount of plant material in the frame.}
+	\item{Lens flare - Bright sunlight reflects within the lens mechanism due to material imperfections in the lens glass, causing haze and starburst artifacts in the image (\autoref{lens_flare}).}
+	\item{Blooming - An oversaturated part of the image bleeds over into other pixels on the image sensor during image capture. This is the most common problem in hemispherical photography.}
+	\item{Obstructions between camera and tree canopy - Understorey vegtation, man-made objects, people etc. can all contribute to an inaccurate estimate of the area of plant material in the frame.}
 \end{itemize}
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=\textwidth]{lens_flare}
+	\caption{An example of a hemispherical photo with excessive lens flare. In this example, the canopy gap fraction will be over-represented as the bright lens flare will be classified as sky during the binarization process. This photo should be discarded from further analysis.}
+	\label{lens_flare}
+\end{figure}
 
 Capturing the right image relies on manual adjustment of three key camera settings to balance the image exposure and sharpness:
 
 \begin{itemize}
 	\item{Shutter speed}
 	\item{Lens aperture}
-	\item{ISO}
+	\item{ISO - analagous to the sensitivity of the sensor to incoming light}
 \end{itemize}
 
-Below is a checklist for taking hemispherical photographs in the field:
+Below is a checklist to guide you in taking informative hemispherical photographs: 
 
 \begin{itemize}
-	\item{Take photos under a uniformly overcast sky, ideally before the sun has risen too high in the sky, or just before sunset, this avoids lens flare and helps to increase the contrast between plant material and sky. I find in the morning the photos are generally better due to the quality of the light. At high latitudes you will have more time than in the tropics.}
+	\item{Take photos under a uniformly overcast sky where possible, ideally before the sun has risen too high in the sky, or just before sunset, this avoids lens flare and helps to increase the contrast between plant material and sky. I find in the morning the photos are generally better due to the quality of the light and the generally more consistent cloud cover. At high latitudes you will have a longer suitable period to capture photos than in the tropics.}
 	\item{Ensure that the camera is level on the tripod and the lens is pointing straight up. Use a spirit level attached to the camera hotshoe to do this.}
-	\item{Adjust the tripod so that the top of the camera lens is 1 m above the ground, or above any understorey vegetation, whichever is higher. I usually find that adjusting the legs of the tripod is easiest, but every tripod is different.}
+	\item{Adjust the tripod so that the top of the camera lens is 1 m above the ground, or above any understorey vegetation you wish to exclude from the analysis, whichever is higher.} 
 	\item{Turn the camera so the top of the camera body is facing north, bring a compass! This ensures that the top of the captured photo is also facing north, which is necessary for calculating LAI.}
 	\item{Make use of the visual display on the camera, if there is one, to get a good view of the photo before you take it.}
 	\item{Set the camera:}
@@ -91,14 +76,12 @@ Below is a checklist for taking hemispherical photographs in the field:
 			\item{Set the focus to infinity}
 			\item{Set the exposure compensation to -0.7. This makes thresholding the image easier later on}
 			\item{Capture fine jpeg and RAW images at the same time}
-			\item{Ensure the camera time and date is accurate (this is purely for ease of matching photos to sites)}
-			\item{Set the Aperture to about 7. This is only a guideline}
-			\item{Adjust the ISO and shutter speed so the photo is neutrally exposed but the shutter speed is always over 1/60sec, otherwise you will introduce camera shake when you press the button}
-			\item{Take all photos in landscape dimensions, never portait}
+			\item{Ensure the camera time and date is accurate (this is purely for ease of matching photos to sites during analysis)}
+			\item{Set the Aperture to about 7. This is only a guideline.}
+			\item{Adjust the ISO and shutter speed so the photo is neutrally exposed but the shutter speed is always over 1/60sec, otherwise you will introduce camera shake when you capture the photo. If it's windy check the photos for blurry tree branches and adjust the shutter speed accordingly.}
+			\item{If the camera attempts to intelligently rotate photos based on the camera orientation, disable this feature and make sure all photos are captured in landscape orientation, never portait.}
 		\end{itemize}
-	\item{Make sure everybody ducks down below the camera when the image is being taken!}
-	\item{Make sure there is a battery and you have a spare battery.}
-	\item{Make sure there is an SD card in the camera, and take a spare.}
+	\item{Make sure everybody ducks down below the camera when the image is taken!}
 	\item{Cover the lens with the lens cap between photos to prevent accidents.}
 \end{itemize}
 
@@ -106,16 +89,16 @@ A daily kit list for taking hemispherical photos:
 
 \begin{itemize}
 	\item{Camera with appropriate fisheye lens}
-	\item{Lens cap for camera}
+	\item{Lens cap}
 	\item{Lens cleaning solution and lens cloth}
 	\item{Tripod}
-	\item{Fully charged battery for camera}
+	\item{At least 2 fully charged batteries for camera}
 	\item{2 SD cards}
 	\item{Spirit level hotshoe attachment for camera}
 	\item{Compass}
 	\item{Notebook and pencil}
 	\item{GPS unit}
-	\item{tape measure > 2 m}
+	\item{Tape measure > 2 m}
 	\item{Waterproof bag to cover camera}
 \end{itemize}
 
@@ -133,37 +116,49 @@ An ideal list of products for a high quality DSLR camera setup:
 
 \subsection{Sampling strategy}
 
-In order to estimate the mean value of various woodland canopy traits over an area of woodland like a survey plot requires multiple photos to be taken. Determining the spatial distribution of these multiple photos is therefore necessary to ensure that a representative sample of the woodland canopy is achieved. 
+In order to estimate the mean value of various woodland canopy traits over an area of woodland, multiple photos must be taken. Determining the spatial distribution of these multiple photos is therefore necessary to ensure that a representative sample of the woodland canopy is achieved. The shape of the sampling area will somehwhat determine the spatial pattern of photos, circular plots may require a different layout to rectangular plots and linear transects, for example.
 
-The shape of the woodland plot will somehwhat determine the spatial pattern of photos, circular plots may require a different layout to rectangular plots and linear transects, for example.
+During analysis it is common to restrict the field of view of the hemispherical photo to 60 degrees. See \autoref{fov} for more information. With this in mind, a simple calculation with some sensible assumptions can estimate the minimum distance of photos to avoid pseudo-replication of the canopy area:
 
-\todo{Diagram of common plot layouts and sampling strategy}
+\begin{equation}
+	D = 2D_{\theta} = 2(h \tan{\theta})
+\end{equation}
 
-A grid sample strategy works well for woodland survey plots. Photo locations should be spaced far enough apart so that no two scans sample the same patch of canopy. 
+where $\theta$ is the angular field of view in degrees, $h$ is the height from the camera lens to the base of the canopy, and $D$ is the minimum distance of photos to avoid pseudo-replication of canopy area.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.5\textwidth]{canopy_trig.drawio}
+	\caption{}
+	\label{canopy_trig}
+\end{figure}
 
 \section{Processing hemispherical photographs}
 
-Many proprietary options for estimating LAI etc. e.g. WinPhot, CAN-EYE. I think manual processing is more flexible and reproducible.
+There are many proprietary options for processing and analysing woodland canopy traits from hemispherical photographs, e.g. WinPhot, CAN-EYE. I think processing with freely available tools is more flexible, reproducible, and fuure-proof, and should be preferred for peer-reviewed research. This part of the guide demonstrates a workflow for processing hemispherical photos using ImageJ v1.x \citep{Schneider2012}.
 
-\subsection{Creating black and white thresholded images manually}
+\subsection{Differentiating between plant and sky}
+
+In order to calculate various woodland canopy traits it is necessary to partition the hemispherical photo into areas of plant material and sky. A straightforward method for this relies on the assumption that the sky will be much brighter than the plant material. This is largely true for a correctly exposed hemispherical photo. The checklist below describes how to partition an image based on pixel brightness, in ImageJ. This process returns an image with white pixels for sky and black pixels for plant material. Monospace blue font refers to menu items in ImageJ to be selected.
 
 \begin{enumerate}
 	\item{Open ImageJ}
-	\item{\texttt{File $\rightarrow$ Open}, then select an image to process}
-	\item{Visually inspect the image to see that there isn't massive amounts of lens flare. See Figure x for an example of lens flare. If you have lots of lens flare, the photo should be thrown out.}
-	\item{\texttt{Image $\rightarrow$ Type $\rightarrow$ 8-bit}}
-	\item{\texttt{Image $\rightarrow$ Adjust $\rightarrow$ Threshold}, tick \texttt{Dark background} and manually adjust the image so all sky is entirely red and the branches are grey, or as near as you can get it. Click \texttt{Apply} to binarize the image}
-	\item{Save the newly thresholded image as a \texttt{.tif} in a separate directory. The image should have black branches and white sky}
-	\item{Repeat for all images}
+	\item{\menu{File $\rightarrow$ Open}, then select an image to process.}
+	\item{Visually inspect the image to see that there isn't large amounts of lens flare. See \autoref{lens_flare} for an example of lens flare. If you have lots of lens flare, the photo should be discarded.}
+	\item{\menu{Image $\rightarrow$ Type $\rightarrow$ 8-bit}}
+	\item{\menu{Image $\rightarrow$ Adjust $\rightarrow$ Threshold}, tick \menu{Dark background} and manually adjust the image so all sky is entirely red and the branches are grey, or as near as you can get it. Click \menu{Apply} to binarize the image.}
+	\item{Save the newly thresholded image as a \file{.tif} in a separate directory. The image should have black plant material and white sky.}
+	\item{Repeat for all images.}
 \end{enumerate}
 
-The above process can be automated with a macro (\autoref{binarize}), but this assumes removes the ability to manually threshold each image, relying instead on a number of binarization algorithms provided in ImageJ. Macros should be saved as a \textit{.ijm} file and called within ImageJ with \texttt{Plugins $\rightarrow$ Macros $\rightarrow$ Run..}. The macro can also be found in \texttt{binarize.ijm} in the supplementary material.
+The above process can be automated with an ImageJ macro (\autoref{binarize}), but this removes the ability to manually threshold each image, relying instead on a number of binarization algorithms provided in ImageJ. This technique should only be used when you are confident that all images are consistently exposed. Macros should be saved as a \file{.ijm} file and called within ImageJ with \menu{Plugins $\rightarrow$ Macros $\rightarrow$ Run..}. For a full list of macro functions available in ImageJ, consult the documentation (\url{https://imagej.nih.gov/ij/developer/macro/functions.html}).
 
-\begin{lstlisting}[label=binarize,caption=ImageJ macro to binarize all images in a nominated directory.]
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=binarize,caption=ImageJ macro to binarize all images in a nominated directory. The macro can also be found in \file{binarize.ijm} in the supplementary material.]
 // User inputs
 ///////////////////////////////////
-input_path = "/Users/johngodlee/Desktop/input/";
-output_path = "/Users/johngodlee/Desktop/output/";
+input_path = "/Users/username/Desktop/input/";
+output_path = "/Users/username/Desktop/output/";
 algorithm = "Default";
 ///////////////////////////////////
 // END user inputs
@@ -183,12 +178,14 @@ for (i=0; i<(list.length); i++) {
 	close();
 }
 \end{lstlisting}
+\end{minipage}
 
-I find that the \texttt{\href{http://www.ktl.elf.stuba.sk/study/vacso/Zadania-Cvicenia/Cvicenie\_3/TimA2/Huang\_E016529624.pdf}{Huang}} binarization algorithm normally works well for thresholding canopy photos, but you should experiment with different algorithms to find the one which works best for your data. \texttt{Default} is also widely appropriate for canopy photos.
+I find that the \verb|Huang| \citep{Huang1995} binarization algorithm normally works well for thresholding canopy photos, but you should experiment with different algorithms to find the one which works best for your data. \verb|Default| is also widely appropriate for canopy photos.
 
-An alternative to simple thresholding of 8-bit greyscale images is to use a colour thresholding technique. Plant material often has very little blue in it, while the sky generally has much more, so one can threshold using only the blue channel of the image (\autoref{binarize_blue_channel}), also found in \texttt{binarize\_blue\_channel.ijm}:
+An alternative to simple thresholding of 8-bit greyscale images is to use a colour thresholding technique. Plant material often reflects very little blue, while the sky generally has much more, so one can threshold using only the blue channel of the image (\citealt{Brusa2014}, \autoref{binarize_blue_channel}).
 
-\begin{lstlisting}[label=binarize_blue_channel, caption=ImageJ macro to binarize images by the blue colour channel]
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=binarize_blue_channel, caption=ImageJ macro to binarize images by the blue colour channel. The macro can also be found in \file{binarize\_blue\_channel.ijm}.]
 // User inputs
 ///////////////////////////////////
 input_path = "/Users/johngodlee/Desktop/input/";
@@ -210,41 +207,112 @@ for (i=0; i<(list.length); i++){
 	close("*");
 }
 \end{lstlisting}
+\end{minipage}
 
-\subsubsection{A note on \texttt{.tif} files}
+\subsection{Cropping a circular image} \label{circle}
+
+Sometimes, it's desirable to crop a hemispherical photo to a smaller circle with a known angle of view (zenith angle). A common convention is to crop an image to a 60 degree angular field of view. See \autoref{fov} for more information. Fisheye lenses have different projection functions which map the curved image onto a flat surface. Here is a list of common projection functions for different lenses:
+
+\begin{itemize}
+	\item{Equisolid (equal area) - $R = 2f\sin{(\theta/2)}$}
+	\item{Equidistant - $R = f\theta$}
+	\item{Orthographic - $R = f\sin{(\theta)}$}
+	\item{Thoby fisheye - $R = 1.47f\sin{(0.713\theta)}$}
+\end{itemize}
+
+where $R$ is the radial position of a point on the image on the sensor, $f$ is the focal length of the lens, and $\theta$ is the angle in radians of the desired angular radius of the cropped image. Here is a diagram I made of what those values equate to on the camera lens.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=\textwidth]{fov_diagram.drawio}
+	\caption{}
+	\label{fov_diagram}
+\end{figure}
+
+The lens I use (Sigma 8 mm) uses an equisolid projection, so I can use the equation above to create a function in the R programing language which will give me the radius of the circle in pixels for a desired angular field of view (\autoref{fov_func}).
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=R, label=fov_func, caption=R function to calculate the pixel radius of a circle with a given zenith angle. Also found in \file{fov\_func.R} in the supplementary materials.]
+fov.px <- function(deg_theta, focal_length_mm, pixel_pitch_um){
+	require(NISTunits)
+	
+	# Convert degrees of theta to radians
+	rads_theta <- NISTdegTOradian(deg_theta) 
+	
+	# Calculate radius of circle drawn by angle of view 
+	# (rads_theta and max_rads_theta) in mm projected onto the sensor plane
+	R <-  2 * focal_length_mm * sin(rads_theta / 2)
+	
+	# Calculate the px per mm on the sensor, i.e. the pixel pitch
+	sensor_px_per_mm_flat <- 1/pixel_pitch_um * 1000
+	
+	# Multiply the mm radius of the desired circle by the 
+	# number of pixels per mm on the sensor, to get the number 
+	# of pixels radius of the desired circle
+	pixels_for_theta <- R * sensor_px_per_mm_flat
+	
+	# Print result
+	print(paste("Radius of circle:", round(pixels_for_theta, digits = 0), "px"))
+}
+
+# Run the function
+fov.px(deg_theta = 90, focal_length_mm = 8, pixel_pitch_um = 5.95)
+\end{lstlisting}
+\end{minipage}
+
+The pixel pitch of the sensor is the real distance (in $\mu$m) from the centre of one pixel on the sensor to the centre of the next, in my case it's 5.95 um. This information can generally be found by querying the technical specifications for the camera, which may be available from the manufacturer or possibly found on online forums.
+
+Similarly, I made a function to calculate the angular field of view of an already cropped circular image, by solving the equation for $\theta$ (\autoref{fov_theta}). 
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=R, label=fov_theta, caption=R function to calculate the zenith angle from a cropped circular image. Also found in \file{fov\_func.R} in the supplementary materials.]
+fov.theta <- function(prop_crop, full_circle_radius_px, focal_length_mm, pixel_pitch_um){
+	require(NISTunits)
+	
+	# Calculate the number of pixels in the radius of the crop
+	px_crop <- full_circle_radius_px * prop_crop
+	
+	# Calculate the radius of the 
+	theta <- 2 * asin(((pixel_pitch_um * px_crop) / (2 * focal_length_mm * 1000)))
+	
+	deg_theta <- NISTradianTOdeg(theta)
+	
+	print(paste("Angle of view: ", round(deg_theta, digits = 2), "A", sep = ""))
+}
+\end{lstlisting}
+\end{minipage}
 
 \subsection{Calculating gap fraction with ImageJ}
 
-Gap fraction is the percentage of the image covered by sky.
+The process for calculating gap fraction is fairly simple. Basically, from the binarized \file{.tif} images you made earlier, you just count the number of pixels in the image which are sky, i.e. white in the thresholded image, then divide by the total number of pixels in the image. It's slightly more complicated when the image is a circle within a larger frame, but not much.
 
-This process is fairly simple. Basically, from the binarized `.tif` images you made earlier, you just count the number of pixels which are sky in the image, i.e. white in the thresholded image, then divide by the total number of pixels in the image. It's slightly more complicated when the image is a circle within a larger frame, but not much.
-
-To do this manually:
+To calculate gap fraction: 
 
 \begin{enumerate}
-	\item{Open ImageJ}
-	\item{\texttt{File $\rightarrow$ Open} then select a binarized \texttt{.tif} image} 
-	\item{\texttt{Edit $\rightarrow$ Invert} to invert the colours}
-	\item{\texttt{Analyze $\rightarrow$ Analyze Particles..}}
+	\item{Open Image}
+	\item{\menu{File $\rightarrow$ Open} then select a binarized \file{.tif} image} 
+	\item{\menu{Edit $\rightarrow$ Invert} to invert the colours}
+	\item{\menu{Analyze $\rightarrow$ Analyze Particles..}}
 		\begin{enumerate}
-			\item{\texttt{Size (pixel\textsuperscript{2})} = 0-infinity}
-			\item{\texttt{Circularity} = 0-1}
-			\item{\texttt{Show} = Nothing}
-			\item{Check \texttt{Summarize}}
+			\item{\menu{Size (pixel\textsuperscript{2})} = 0-infinity}
+			\item{\menu{Circularity} = 0-1}
+			\item{\menu{Show} = Nothing}
+			\item{Check \menu{Summarize}}
 		\end{enumerate}
-	\item{The results should appear in a table, the gap fraction value is \texttt{\%Area}}
+	\item{The results should appear in a table, the gap fraction value is \menu{\%Area}}
 	\item{Rinse and repeat for all images}
 \end{enumerate}
 
-This macro performs the same process but for a folder of images and exports a \texttt{.csv} spreadsheet file of the results. Remember to change the user inputs to point to where you would like images to be opened from and the spreadsheet saved to. The macro can also be found in \texttt{gap\_frac\_image.ijm}:
+\autoref{gap_frac_image} performs the same process but for a folder of images and exports a \file{.csv} spreadsheet file of the results. Remember to change the user inputs to point to where you would like images to be opened from and the spreadsheet saved to.
 
-\begin{lstlisting}[label=gap_frac_image, caption=ImageJ macro to calculate the gap fraction of a full image]
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=gap_frac_image, caption=ImageJ macro to calculate the gap fraction of a full image. The macro can also be found in \file{gap\_frac\_image.ijm}.]
 // User inputs
 ///////////////////////////////////
-input_path = "/Users/johngodlee/Desktop/input/";
-output_path = "/Users/johngodlee/Desktop/output/";
+input_path = "/Users/username/Desktop/input/";
+output_path = "/Users/username/Desktop/output/";
 binarize_first = "TRUE";
-// Only set to "FALSE" if a binarized `.tif` is used
+// Only set to "FALSE" if a binarized '.tif' is used
 algorithm = "Default";
 ///////////////////////////////////
 // END user inputs
@@ -272,10 +340,12 @@ selectWindow("Summary");
 saveAs("Results", ""+output_path+"results.csv"); 
 run("Close");
 \end{lstlisting}
+\end{minipage}
 
-The process is similar for a circular image such as that taken with a full frame camera and a fisheye lens, except you draw a circle selection to exclude the black uninformative bits of the image before running \texttt{Analyze Particles...}. The macro looks like this and can also be found in \texttt{gap\_frac\_circle.ijm}:
+The process is similar for a circular image such as that taken with a full frame camera and a fisheye lens, except you draw a circle selection to exclude the black uninformative bits of the image before running \menu{Analyze Particles...}. See \autoref{gap_frac_circle} for the macro. 
 
-\begin{lstlisting}[label=gap_frac_circle, caption=ImageJ macro to calculate the gap fraction of a circular selection of an image]
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[label=gap_frac_circle, caption=ImageJ macro to calculate the gap fraction of a circular selection of an image. The macro can also be found in \file{gap\_frac\_circle.ijm}.]
 // User inputs
 ///////////////////////////////////
 input_path = "/Users/johngodlee/Desktop/input/";
@@ -317,104 +387,36 @@ run("Close");
 
 saveAs("Results", ""+output_path+"gap_frac_results.xls");
 \end{lstlisting}
+\end{minipage}
 
-The circular diameter of the image to fill \texttt{circle\_diam} can be measured in ImageJ by selecting \texttt{Straight Line} from the toolbar then drawing a straight line across the centre of the circular image. Then select \texttt{Analyze $\rightarrow$ Measure} to get the Length of the line in the Results table. Alternatively, read below if you would like to crop the circular image to a particular angle of view, to exclude parts of the image closer to the ground.
-
-\subsection{Cropping a circular image}
-
-Sometimes, it's desirable to crop a hemispherical photo to a smaller circle with a known angle of view (zenith angle). Fisheye lenses have different projection functions which map the curved image onto a flat surface, much like a map projection. Here is a list of common projection functions for different lenses:
-
-\begin{itemize}
-	\item{Equisolid (equal area) - $R = 2f\sin{(Z/2)}$}
-	\item{Equidistant - $R = fZ$}
-	\item{Orthographic - $R = f\sin{(Z)}$}
-	\item{Thoby fisheye - $R = 1.47f\sin{(0.713Z)}$}
-\end{itemize}
-
-Where \texttt{R} is the radial position of a point on the image on the sensor, \texttt{f} is the focal length of the lens, and \texttt{Z} is the angle in radians of the desired angular radius of the cropped image. Here is a diagram I made of what I think those values equate to on the camera lens.
-
-fov\_diagram.png
-
-The lens I use (Sigma 8 mm) uses an equisolid projection, so I can use the equation above to create a function in the R programing language which will give me the radius of the circle in pixels for a desired \todo{??} (\autoref{fov_func}).
-
-\begin{lstlisting}[language=R, label=fov_func, caption=R function to calculate the pixel radius of a circle with a given zenith angle]
-fov.px <- function(deg_theta, focal_length_mm, pixel_pitch_um){
-	require(NISTunits)
-	
-	# Convert degrees of theta to radians
-	rads_theta <- NISTdegTOradian(deg_theta) 
-	
-	# Calculate radius of circle drawn by angle of view 
-	# (rads_theta and max_rads_theta) in mm projected onto the sensor plane
-	R <-  2 * focal_length_mm * sin(rads_theta / 2)
-	
-	# Calculate the px per mm on the sensor, i.e. the pixel pitch
-	sensor_px_per_mm_flat <- 1/pixel_pitch_um * 1000
-	
-	# Multiply the mm radius of the desired circle by the 
-	# number of pixels per mm on the sensor, to get the number 
-	# of pixels radius of the desired circle
-	pixels_for_theta <- R * sensor_px_per_mm_flat
-	
-	# Print result
-	print(paste("Radius of circle:", round(pixels_for_theta, digits = 0), "px"))
-}
-
-# Run the function
-fov.px(deg_theta = 90, focal_length_mm = 8, pixel_pitch_um = 5.95)
-\end{lstlisting}
-
-The pixel pitch of the sensor is the real distance (in $\mu$m) from the centre of one pixel on the sensor to the centre of the next, in my case it's 5.95 um. This information can generally be found by querying the technical specifications for the camera, which may be available from the manufacturer or possibly found on online forums.
-
-Similarly, I made a function to calculate the degrees `Î¸` of an already cropped circular image, by solving the equation for `Î¸` (\autoref{fov_theta}). Both functions can also be found in \texttt{fov\_func.R}.
-
-\begin{lstlisting}[language=R, label=fov_theta, caption=R function to calculate the zenith angle from a cropped circular image.]
-fov.theta <- function(prop_crop, full_circle_radius_px, focal_length_mm, pixel_pitch_um){
-	require(NISTunits)
-	
-	# Calculate the number of pixels in the radius of the crop
-	px_crop <- full_circle_radius_px * prop_crop
-	
-	# Calculate the radius of the 
-	theta <- 2 * asin(((pixel_pitch_um * px_crop) / (2 * focal_length_mm * 1000)))
-	
-	deg_theta <- NISTradianTOdeg(theta)
-	
-	print(paste("Angle of view: ", round(deg_theta, digits = 2), "A", sep = ""))
-}
-\end{lstlisting}
-
-These values can be used in the ImageJ macro \texttt{gap\_frac\_circle.ijm} to alter \texttt{circle\_diam} to make a circular selection of the image of a certain view angle.
+The circular diameter of the image to fill \verb|circle_diam| can be measured in ImageJ by selecting \menu{Straight Line} from the toolbar then drawing a straight line across the centre of the circular image. Then select \menu{Analyze $\rightarrow$ Measure} to get the length of the line in the Results table. Alternatively, use the methods presented above in \autoref{circle} to crop the circular image to a particular angle of view, to exclude parts of the image closer to the ground.
 
 \subsection{Calculating Leaf Area Index}
 
-This part relies mostly on code written by \href{https://github.com/naturalis/Hemiphot}{Hans ter Steege's HemiPhot package}, which ports WinPhot into the R language. \todo{More about the history of Winphot}. The code includes functions for thresholding and binarizing images, but I prefer to do this step in ImageJ prior to aalysing the images in R, because I feel like I have more power over how the images are thresholded this way.
+This part of the guide relies mostly on code written by Hans ter Steege's HemiPhot package \citep{Steege2018}, which ports WinPhot into the R language. Winphot was originally written by Hans ter Steege in 1997, and Hemiphot can be seen as the natural progression of this software. Winphot is now obsolete and has been unmaintained since Windows XP. The code includes functions for thresholding and binarizing images, but I prefer to do this step in ImageJ prior to analysing the images in R, because I like I have more control over how the images are thresholded this way.
 
-The first thing to do is create an image (`white\_image.jpg`) in Photoshop like the one below, which has a white circle and black background the same size as my hemispherical images. This is so you can find the pixel diameter of the image for the calculations. Alternatively, just use the pixel diameter used in the ImageJ circular cropping macros:
-
-white\_image.jpg)
+The workflow below assumes you are using RStudio, but you can use the scripts in any R programming environment. 
 
 \begin{enumerate}
 	\item{Open RStudio}
-	\item{Open a new script (\texttt{File $\rightarrow$ New File $\rightarrow$ R Script})}
+	\item{Open a new script (\menu{File $\rightarrow$ New File $\rightarrow$ R Script})}
 	\item{Save the script in a folder above the images folder}
 	\item{Enter the following preamble into the R script}
 \end{enumerate}
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}
 # Set working directory to location of thresholded images
 setwd("LOCATION_OF_ANALYSIS")
 
 # Source the functions used to calculate stuff
 source("hemiphot.R")
-
-# Packages
-library(jpeg)
 \end{lstlisting}
+\end{minipage}
 
-5. Add \texttt{white\_image.jpg} to the same folder where the thresholded images are found
-6. Read in all the previously thresholded and binarized \texttt{.tif} images and create an empty data frame which will later be filled with canopy trait statistics like LAI and canopy openness.
+5. Read in all the previously thresholded and binarized \file{.tif} images and create an empty data frame which will later be filled with canopy trait statistics like LAI and canopy openness.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}
 # List all images in the directory
 all_images <- list.files("img/", pattern = ".tif")
@@ -429,24 +431,22 @@ names(all_data) = c("File", "CanOpen", "LAI", "DirectAbove",
 # Fill first column with image names
 all_data[,1] = all_images
 \end{lstlisting}
+\end{minipage}
 
-7. Read in the reference image (`white\_img.jpg`) as a matrix of pixel values:
+6. Set some parameters for the location the photos are being taken. Approximate location (0.1 degrees latitude) is good enough for our purposes. Note that the values below are for somewhere in Africa and should be changed:
 
-\begin{lstlisting}
-white_img <- readJPEG("img/white_image.jpg", native = F)
-\end{lstlisting}
-
-8. Set some parameters for the location the photos are being taken. Approximate location (0.1 degrees latitude) is good enough for our purposes. Note that the values below are for somewhere in Africa and should be changed:
-
+\begin{minipage}{\linewidth}
 \begin{lstlisting}
 location.latitude   = -15
 location.altitude   = 200
 location.day        = 30
 location.days       = seq(15,360,30)   # roughly the middle of each month of the year 
 \end{lstlisting}
+\end{minipage}
 
-9. Set some parameters for the images, cropping them to a circle and setting the threshold. Even if the images have been thresholded already, thresholding them again won't change anything. These parameters are ones I have used on my camera (Nikon D750 with Sigma 8 mm equisolid fisheye lens), so may need to be changed depending on your equipment:
+7. Set some parameters for the images, cropping them to a circle and setting the threshold. Even if the images have been thresholded already, thresholding them again won't change anything. These parameters are ones I have used on my camera (Nikon D750 with Sigma 8 mm equisolid fisheye lens), so may need to be changed depending on your equipment:
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}
 ## Image parameters
 
@@ -460,9 +460,11 @@ location.cy         = (hemi_dim[1] / 2)  # y coordinate of center image
 location.cr         = radius  # radius of circle
 location.threshold  = 0.42
 \end{lstlisting}
+\end{minipage}
 
-10. Set some atmospheric parameters. I've loosely estimated these for a location in Angola where I work, but by no means is it scientific. I would not have much confidence in the statistics generated using these parameters, namely \texttt{DirectAbove}, \texttt{DiffAbove}, \texttt{DirectBelow} and \texttt{DiffBelow}.
+10. Set some atmospheric parameters. The metrics affected by these parameters are: \verb|DirectAbove|, \verb|DiffAbove|, \verb|DirectBelow| and \verb|DiffBelow|. If these metrics are of no interest to you, just fill these parameters with random decimals between zero and one.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}
 # atmospheric parameters
 ## Atmospheric transmissivity
@@ -472,9 +474,11 @@ location.tau = 0.6
 ## Amount of direct light that is used as diffuse light in the Uniform Ovecast Sky (UOC)
 location.uoc = 0.15
 \end{lstlisting}
+\end{minipage}
 
 11. Run a big for loop to calculate the statistics for each photo
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[language=R]
 for(i in 1:img_length){
 	## read file
@@ -510,79 +514,71 @@ for(i in 1:img_length){
 	all_data[i,7] = rad[4]
 }
 \end{lstlisting}
+\end{minipage}
 
-12. Finally, look at the output, which is stored in \texttt{all\_data}.
+12. Finally, look at the output, which is stored in \verb|all_data|.
 
-\begin{lstlisting}
-all_data
-\end{lstlisting}
+There are many other functions in the source code for Hemiphot and I recommend reading through them along with the documentation to see what is right for your needs. A copy of the script above is included in \file{hemiphot\_example.R}.
 
-There are many other functions in \texttt{hemiphot.R} and I recommend reading through them along with the documentation to see what is right for your needs.
+\subsection{Setting the focus to infinity} 
 
-\subsection{Setting the focus to infinity}
+My assumption has always been that when taking hemispherical photos of forest canopies, the focus of the lens should always be set to infinity. While this knowledge is repeated throughout the literature, it is difficult to find much discussion on \textit{why} this is the case. What follows is a series of quotes from the literature relating on the discussion of setting the lens focus to infinity.
 
-My assumption has always been that when taking hemispherical photos of forest canopies, the focus of the lens should always be set to infinity. However, I'm not sure where I got this assumption from, or whether it's even true, I've just always believed it. So to set my mind at ease and back up my reasons for telling others to set the focus to infinity I trawled through a few papers. This is just a rundown of what those papers were with quotes of what they sai regarding the issue.
+\begin{minipage}{\linewidth}
+\begin{framed}
+We used a Nikon MF-16 camera and a Nikkor 8-mm fish-eye lens with TriX ASA 400 film, a red filter to increase sharpness of leaf edges, and the \textit{focus set to infinity}.
 
-This first paper only says that non-DSLR cameras should have the focus set to infinity, either that or it's confusingly written.
+-- \citealt{Englund2000}
+\end{framed}
+\end{minipage}
 
-> All camera internal software filters (e.g. sharpen the picture) need to be turned off. For non-DSLR cameras the "Fish-Eye setting" means that the zoom is fixed at the widest angle and \textit{focus is set to infinity}.
-> 
-> -- Melrose et al. 2012
+\begin{minipage}{\linewidth}
+\begin{framed}
+The lens was set to a small aperture and \textit{focused on infinity} (Frazer et al. 2001; Zhu et al. 2003)
 
-These next few simply say that they did set it to infinity, but don't say why..
+-- \citealt{Hu2009}
+\end{framed}
+\end{minipage}
 
-> We used a Nikon MF-16 camera and a Nikkor 8-mm fish-eye lens with TriX ASA 400 film, a red filter to increase sharpness of leaf edges, and the \textit{focus set to infinity}.
->
-> -- Englund et al. 2000
+\begin{minipage}{\linewidth}
+\begin{framed}
+Exposure settings were selected to obtain the best contrast between foliage and sky and making the last one appear white (cloudy sky offers the best condition in this context). The camera was used in automatic mode using the parameters fixed in FISHEYE1 lens mode (\textit{focus set to infinity}, widest zoom, metering center-weighted), and the shutter speed was varied automatically by the camera.
 
-> The lens was set to a small aperture and \textit{focused on infinity} (Frazer et al. 2001; Zhu et al. 2003)
->
-> -- Hu et al. 2009
-
-> Exposure settings were selected to obtain the best contrast between foliage and sky and making the last one appear white (cloudy sky offers the best condition in this context). The camera was used in automatic mode using the parameters fixed in FISHEYE1 lens mode (\textit{focus set to infinity}, widest zoom, metering center-weighted), and the shutter speed was varied automatically by the camera.
-> 
-> -- Paletto \& Tosi 2009
+-- \citealt{Paletto2009}
+\end{framed}
+\end{minipage}
 
 This next quote comes from a paper which many others reference when describing proper protocol for taking hemispherical photos: 
 
-> Unlike the Nikon F, the digital camera did not allow full manual control of both the shutter speed and lens aperture. We therefore \textit{set the autofocus, exposure mode, and f-stop of the digital camera to infinity}, aperture priority (shutter speed is set automatically by the camera), and f/2.6, respectively. 
-> 
-> -- Frazer et al. 2001
+\begin{minipage}{\linewidth}
+\begin{framed}
+Unlike the Nikon F, the digital camera did not allow full manual control of both the shutter speed and lens aperture. We therefore \textit{set the autofocus, exposure mode, and f-stop of the digital camera to infinity}, aperture priority (shutter speed is set automatically by the camera), and f/2.6, respectively. 
 
-This one references a really dodgy looking old downloadable tutorial series on taking good digital photos, called 123di. Most of it is behind a paywall though, so I can't read the applicable bit. But at least it sort of says why they set the focus to infinity, because the depth of field is practically infinite under these conditions.
+-- \citealt{Frazer2001}
+\end{framed}
+\end{minipage}
 
-> Photographic images were recorded using a Sigma 8 mm f/4 fisheye lens (Sigma Corporation, Tokyo, Japan) at the highest possible resolution (3040 a— 2008 pixels) with highest ISO setting (ISO 200). Moreover, \textit{the focus ring was set to infinity when using the fisheye lens, as depth of field is practically infinite and focusing was not required (Bockaert, 2004).}
->
-> -- Jonckheere et al. 2005
+While this paper is one of the most respected guides on hemispherical photography, it references an unconventional source when describing the practice of setting the focus to infinity. A downloadable tutorial series on taking high-quality digital photos, called 123di \citep{}. Most of this resource is behind a paywall, so I can't read the applicable bit. Importantly however, this paper references \textit{why} the authors set the focus to infinity, because the depth of field is practically infinite under these conditions.
 
+\begin{minipage}{\linewidth}
+\begin{framed}
+Photographic images were recorded using a Sigma 8 mm f/4 fisheye lens (Sigma Corporation, Tokyo, Japan) at the highest possible resolution (3040-2008 pixels) with highest ISO setting (ISO 200). Moreover, \textit{the focus ring was set to infinity when using the fisheye lens, as depth of field is practically infinite and focusing was not required (Bockaert, 2004).}
 
-References
+-- \citealt{Jonckheere2005}
+\end{framed}
+\end{minipage}
 
-Melrose et al. 2012 - Manual on methods and criteria for harmonized sampling, assessment, monitoring and analysis of the effects of air pollution on forests - Part XVII Leaf Area Measurements
+\subsection{Zenith angle for LAI calculations} \label{fov}
 
-Englund et al. 2000 - Evaluation of digital and film hemispherical photography and spherical densiometry for measuring forest light environments
+This is the only reference I have found in the literature which discusses why the angle of view should be limited from a full 180 degree hemispherical image. It can be supposed that below 60 degrees, in most woodland canopies, variation in tree canopy density does little to affect sunlight penetration, due to the greater depth of canopy at these angles. Additionally, for many fisheye lenses, angles below 60 degrees introduce significant visual artefacts and distortion, which may lead to biased results. 
 
-Hu et al. 2009 - Estimation of canopy gap size and gap shape using a hemispherical photograph
+\begin{minipage}{\linewidth}
+\begin{framed}
+In the range from zero to about 60 zenith angle the canopy effects are more significant. This is the useful working range of most hemispherical photograph data.
 
-Frazer et al. 2001 - A comparison of digital and film fisheye photography for analysis of forest canopy structure and gap light transmission
-
-Jonckheere et al. 2005 - Assessment of automatic gap fraction estimation of forests from digital hemispherical photography 
-
-Paletto \& Tosi 2009 - Forest canopy cover and canopy closure: comparison of assessment techniques
-
-
-
-
-
-\subsection{Zenith angle for LAI calculations}
-
-This is the only reference I have found so far which specifically states \textit{why} the angle of view should be limited from a full 180 degree hemispherical image. 
-
-> In the range from zero to about 60 zenith angle the canopy effects are more significant. This is the useful working range of most hemispherical photograph data.
-> 
-> -- Jupp et al. 2009
-
-
+-- \citet{Jupp2009}
+\end{framed}
+\end{minipage}
 
 \section{Alternatives to hemispherical photography}
 
@@ -590,14 +586,28 @@ There are a number of other ways to measure the same canopy traits for which hem
 
 \subsection{LiCOR LAI-2000}
 
+A device operating on a similar principle to hemispherical photography, which processes an image and provides a percentage canopy cover estimate. Measurements are paired with replicates taken simultaneously under an open sky to normalise changing light conditions.
+
 \subsection{LiDAR}
+
+Terrestrial or airborne Light-Detection And Ranging equipment can be used to estimate canopy cover and the vertical distribution of canopy cover. Equipment is expensive and processing is complex, but this method is currently the most precise and accurate \citep{Seidel2011}.
 
 \subsection{Periscope densitometer}
 
+A simple periscope tube is marked with a cross. The periscope is pointed upwards and the operator records the presence or absence of plant material in the centre of the cross. A dense grid of measurements is taken which can then be converted to a percentage canopy cover.
+
 \subsection{Reflective dish densitometer}
+
+A concave mirror surface is divided into a grid to facilitate the estimation of the percentage of sky covered by plant material. This method, while previously commonplace in ecology and forestry, is now not recommended, as it has been shown that large recording biases can occur, even when measurements are taken by a trained operator.
 
 \subsection{Leaf collection}
 
+A leaf trap of known dimensions is left on the forest floor for a known period of time to capture falling leaves. The area of these individual leaves is measured to estimate the total leaf area of the canopy, assuming a constant rate of leaf fall.
+
 \subsection{Manual harvesting}
+
+Branches within a known area of canopy are harvested and the leaves removed. The area of these individual leaves is measured to directly measure the total leaf area of the canopy.
+
+\bibliography{hemi_photo_guide.bib}
 
 \end{document}
