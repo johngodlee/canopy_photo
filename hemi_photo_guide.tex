@@ -9,7 +9,7 @@
 \newcommand\file[1]{\texttt{\underline{#1}}}
 
 \title{Hemispherical photography for the estimation of woodand canopy traits}
-\date{2020-07-22}
+\date{2019-10-22}
 \author{John L. Godlee}
 
 \begin{document}
@@ -158,7 +158,7 @@ In order to calculate various woodland canopy traits it is necessary to partitio
 	\label{threshold}
 \end{figure}
 
-The above process can be automated with an ImageJ macro (\autoref{binarize}), but this removes the ability to manually threshold each image, relying instead on a number of binarization algorithms provided in ImageJ. This technique should only be used when you are confident that all images are consistently exposed. Macros should be saved as a \file{.ijm} file and called within ImageJ with \menu{Plugins $\rightarrow$ Macros $\rightarrow$ Run..}. For a full list of macro functions available in ImageJ, consult the documentation (\url{https://imagej.nih.gov/ij/developer/macro/functions.html}).
+The above process can be automated with an ImageJ macro (\autoref{binarize}), but this removes the ability to manually threshold each image, relying instead on a number of binarization algorithms provided in ImageJ. This technique should only be used when you are confident that all images are consistently exposed. Macros should be saved as a \file{.ijm} file and called within ImageJ with \menu{Plugins $\rightarrow$ Macros $\rightarrow$ Run..}. For a full list of macro functions available in ImageJ, consult the documentation (\url{https://imagej.nih.gov/ij/developer/macro/functions.html}). 
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[label=binarize,caption=ImageJ macro to binarize all images in a nominated directory. The macro can also be found in \file{binarize.ijm} in the supplementary material.]
