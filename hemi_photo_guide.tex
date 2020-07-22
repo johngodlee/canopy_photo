@@ -129,7 +129,7 @@ where $\theta$ is the angular field of view in degrees, $h$ is the height from t
 \begin{figure}[H]
 \centering
 	\includegraphics[width=0.5\textwidth]{canopy_trig.drawio}
-	\caption{}
+	\caption{Schematic diagram of the measurements used when calculating the minimum distance between hemispherical photo locations.}
 	\label{canopy_trig}
 \end{figure}
 
@@ -150,6 +150,13 @@ In order to calculate various woodland canopy traits it is necessary to partitio
 	\item{Save the newly thresholded image as a \file{.tif} in a separate directory. The image should have black plant material and white sky.}
 	\item{Repeat for all images.}
 \end{enumerate}
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=0.8\textwidth]{threshold}
+	\caption{Screenshot of the binarization thresholding process in ImageJ.}
+	\label{threshold}
+\end{figure}
 
 The above process can be automated with an ImageJ macro (\autoref{binarize}), but this removes the ability to manually threshold each image, relying instead on a number of binarization algorithms provided in ImageJ. This technique should only be used when you are confident that all images are consistently exposed. Macros should be saved as a \file{.ijm} file and called within ImageJ with \menu{Plugins $\rightarrow$ Macros $\rightarrow$ Run..}. For a full list of macro functions available in ImageJ, consult the documentation (\url{https://imagej.nih.gov/ij/developer/macro/functions.html}).
 
@@ -225,7 +232,7 @@ where $R$ is the radial position of a point on the image on the sensor, $f$ is t
 \begin{figure}[H]
 \centering
 	\includegraphics[width=\textwidth]{fov_diagram.drawio}
-	\caption{}
+	\caption{Schematic diagram of a camera lens and sensor, demonstrating the measurements used when cropping an image to a given angular field of view.}
 	\label{fov_diagram}
 \end{figure}
 
@@ -234,29 +241,26 @@ The lens I use (Sigma 8 mm) uses an equisolid projection, so I can use the equat
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[language=R, label=fov_func, caption=R function to calculate the pixel radius of a circle with a given zenith angle. Also found in \file{fov\_func.R} in the supplementary materials.]
 fov.px <- function(deg_theta, focal_length_mm, pixel_pitch_um){
-	require(NISTunits)
-	
-	# Convert degrees of theta to radians
-	rads_theta <- NISTdegTOradian(deg_theta) 
-	
-	# Calculate radius of circle drawn by angle of view 
-	# (rads_theta and max_rads_theta) in mm projected onto the sensor plane
-	R <-  2 * focal_length_mm * sin(rads_theta / 2)
-	
-	# Calculate the px per mm on the sensor, i.e. the pixel pitch
-	sensor_px_per_mm_flat <- 1/pixel_pitch_um * 1000
-	
-	# Multiply the mm radius of the desired circle by the 
-	# number of pixels per mm on the sensor, to get the number 
-	# of pixels radius of the desired circle
-	pixels_for_theta <- R * sensor_px_per_mm_flat
-	
-	# Print result
-	print(paste("Radius of circle:", round(pixels_for_theta, digits = 0), "px"))
+  # Convert degrees of theta to radians
+  rads_theta <- NISTunits::NISTdegTOradian(deg_theta) 
+  
+  # Calculate radius of circle drawn by angle of view 
+  # (rads_theta and max_rads_theta) in mm projected onto the sensor plane
+  R <-  2 * focal_length_mm * sin(rads_theta / 2)
+  
+  # Calculate the px per mm on the sensor, i.e. the pixel pitch
+  sensor_px_per_mm_flat <- 1/pixel_pitch_um * 1000
+  
+  # Multiply the mm radius of the desired circle by the number of 
+  # pixels per mm on the sensor, to get the number of pixels radius 
+  # of the desired circle
+  pixels_for_theta <- round(R * sensor_px_per_mm_flat, 0)
+  
+  return(pixels_for_theta)
 }
 
 # Run the function
-fov.px(deg_theta = 90, focal_length_mm = 8, pixel_pitch_um = 5.95)
+fov.px(90, 8, 5.95)
 \end{lstlisting}
 \end{minipage}
 
@@ -267,17 +271,15 @@ Similarly, I made a function to calculate the angular field of view of an alread
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[language=R, label=fov_theta, caption=R function to calculate the zenith angle from a cropped circular image. Also found in \file{fov\_func.R} in the supplementary materials.]
 fov.theta <- function(prop_crop, full_circle_radius_px, focal_length_mm, pixel_pitch_um){
-	require(NISTunits)
-	
-	# Calculate the number of pixels in the radius of the crop
-	px_crop <- full_circle_radius_px * prop_crop
-	
-	# Calculate the radius of the 
-	theta <- 2 * asin(((pixel_pitch_um * px_crop) / (2 * focal_length_mm * 1000)))
-	
-	deg_theta <- NISTradianTOdeg(theta)
-	
-	print(paste("Angle of view: ", round(deg_theta, digits = 2), "A", sep = ""))
+  # Calculate number of pixels in the radius of the crop
+  px_crop <- full_circle_radius_px * prop_crop
+  
+  # Calculate radius
+  theta <- 2 * asin(((pixel_pitch_um * px_crop) / (2 * focal_length_mm * 1000)))
+  
+  deg_theta <- round(NISTradianTOdeg(theta), 2)
+  
+  return(deg_theta)
 }
 \end{lstlisting}
 \end{minipage}
@@ -383,9 +385,6 @@ for (i=0; i<(list.length); i++) {
 selectWindow("Summary"); 
 saveAs("Results", ""+output_path+"results.csv"); 
 run("Close");
-}
-
-saveAs("Results", ""+output_path+"gap_frac_results.xls");
 \end{lstlisting}
 \end{minipage}
 
@@ -418,18 +417,17 @@ source("hemiphot.R")
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}
-# List all images in the directory
-all_images <- list.files("img/", pattern = ".tif")
+# Load images from directory 
+img_file_list <- list.files("test_img", pattern = ".tif", full.names = TRUE)
 
-# How many images
-img_length = length(all_images)
+img_list <- lapply(img_file_list, readTIFF)
 
 # Create empty dataframe, 6x7 and fill it with zeroes
-all_data = data.frame(matrix(data = 0, nrow = img_length, ncol = 7))
+all_data = data.frame(matrix(data = 0, nrow = length(img_file_list), ncol = 7))
 names(all_data) = c("File", "CanOpen", "LAI", "DirectAbove", 
 	"DiffAbove", "DirectBelow", "DiffBelow")
 # Fill first column with image names
-all_data[,1] = all_images
+all_data[,1] = img_file_list 
 \end{lstlisting}
 \end{minipage}
 
@@ -448,17 +446,9 @@ location.days       = seq(15,360,30)   # roughly the middle of each month of the
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}
-## Image parameters
-
-### Drawing circles and identifying the image centre point
-hemi_dim <- dim(white_img)
-radius <- max(rowSums(white_img[,,1] > 0.4) / 2)
-
-### determine using a single image and fill in here for batch processing
-location.cx         = (hemi_dim[2] / 2)  # x coordinate of center of image
-location.cy         = (hemi_dim[1] / 2)  # y coordinate of center image
-location.cr         = radius  # radius of circle
-location.threshold  = 0.42
+location.cx <- dim(img_list[[1]])[2] / 2  # x coordinate of center
+location.cy <- dim(img_list[[1]])[1] / 2  # y coordinate of center
+location.cr <- fov.px(60, 8, 5.95)  # Circle radius of interest
 \end{lstlisting}
 \end{minipage}
 
@@ -466,12 +456,11 @@ location.threshold  = 0.42
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}
-# atmospheric parameters
-## Atmospheric transmissivity
-## Normally set at 0.6, but can vary between 0.4-0.6 in the tropics
+# Atmospheric transmissivity
+# Normally set at 0.6, but can vary between 0.4-0.6 in the tropics
 location.tau = 0.6
 
-## Amount of direct light that is used as diffuse light in the Uniform Ovecast Sky (UOC)
+# Amount of direct light that is used as diffuse light in the Uniform Ovecast Sky (UOC)
 location.uoc = 0.15
 \end{lstlisting}
 \end{minipage}
@@ -480,38 +469,32 @@ location.uoc = 0.15
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[language=R]
-for(i in 1:img_length){
-	## read file
-	image <- readJPEG(paste("test_img/", all_images[i], sep = ""), native = F)
+for(i in 1:length(img_file_list)){
+  # read file
+  image <- readTIFF(img_file_list[i])
+  
+  # convert to Hemi image
+  image <- Image2Hemiphot(image)
+  
+  # set circle parameters
+  image <- SetCircle(image, cx = location.cx, cy = location.cy, cr = location.cr)
+  
+  gap.fractions <- CalcGapFractions(image)
+  all_data[i,2] = CalcOpenness(fractions = gap.fractions)
+  
+  # calculate LAI according to Licor's LAI Analyzer 
+  all_data[i,3] = CalcLAI(fractions = gap.fractions)
+  
+  # Photosynthetic Photon Flux Density (PPDF, umol m-1 s-1) P
+  rad <- CalcPAR.Day(im = image,
+    lat = location.latitude, d = days,
+    tau = location.tau, uoc = location.uoc, 
+    draw.tracks = F, full.day = F)
 
-	## conver to Hemi image
-	image <- Image2Hemiphot(image)
-
-	## set circle parameters
-	image <- SetCircle(image, cx = location.cx, cy = location.cy, cr = location.cr)
-
-	## select blue channel
-	image <- SelectRGB(image, "B")
-
-	#threshold
-	image <- ThresholdImage(im = image, th = location.threshold, draw.image = F)
-
-	# canopy openness
-	gap.fractions <- CalcGapFractions(image)
-	all_data[i,2] = CalcOpenness(fractions = gap.fractions)
-
-	## calculate LAI according to Licor's LAI Analyzer
-	all_data[i,3] = CalcLAI(fractions = gap.fractions)
-
-	## Photosynthetic Photon Flux Density (PPDF, umol m-1 s-1) P
-	rad <- CalcPAR.Day(im = image,
-		lat = location.latitude, d = location.days,
-		tau = location.tau, uoc = location.uoc,
-										draw.tracks = F, full.day = F)
-	all_data[i,4] = rad[1]
-	all_data[i,5] = rad[2]
-	all_data[i,6] = rad[3]
-	all_data[i,7] = rad[4]
+  all_data[i,4] = rad[1]
+  all_data[i,5] = rad[2]
+  all_data[i,6] = rad[3]
+  all_data[i,7] = rad[4]
 }
 \end{lstlisting}
 \end{minipage}

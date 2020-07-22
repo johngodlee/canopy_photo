@@ -108,22 +108,22 @@ location.uoc <- 0.15  # Amount of direct light that is used as diffuse light in 
 
 # Start the batch loop
 for(i in 1:length(img_file_list)){    
-  ## read file
+  # read file
   image <- readTIFF(img_file_list[i])
   
-  ## conver to Hemi image
+  # convert to Hemi image
   image <- Image2Hemiphot(image)
   
-  ## set cirlce parameters
+  # set circle parameters
   image <- SetCircle(image, cx = location.cx, cy = location.cy, cr = location.cr)
   
   gap.fractions <- CalcGapFractions(image)
   all_data[i,2] = CalcOpenness(fractions = gap.fractions)
   
-  ## calculate LAI according to Licor's LAI Analyzer 
+  # calculate LAI according to Licor's LAI Analyzer 
   all_data[i,3] = CalcLAI(fractions = gap.fractions)
   
-  ## Photosynthetic Photon Flux Density (PPDF, umol m-1 s-1) P
+  # Photosynthetic Photon Flux Density (PPDF, umol m-1 s-1) P
   rad <- CalcPAR.Day(im = image,
     lat = location.latitude, d = days,
     tau = location.tau, uoc = location.uoc, 

@@ -49,7 +49,7 @@ fov.theta <- function(prop_crop, full_circle_radius_px, focal_length_mm, pixel_p
   # Calculate number of pixels in the radius of the crop
   px_crop <- full_circle_radius_px * prop_crop
   
-  # Calculate the radius of the 
+  # Calculate radius
   theta <- 2 * asin(((pixel_pitch_um * px_crop) / (2 * focal_length_mm * 1000)))
   
   deg_theta <- round(NISTradianTOdeg(theta), 2)
