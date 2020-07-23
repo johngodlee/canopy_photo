@@ -16,6 +16,11 @@
 
 \maketitle
 
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
 This guide serves as an introduction to the use of hemispherical photography for estimating woodland tree canopy variables in ecological research. Much of this guide has been informed by personal fieldwork, along with scattered references found throughout the scientific and practitioner literature. This guide is an attempt to bring those ideas into a cohesive resource which assumes little prior knowledge of the technique. This guide focuses on practical application of hemispherical photography, rather than being an in-depth analysis of the science of optics. It is designed to provide novice users with the means to obtain robust results quickly for use in their research. The manual contains a number of checklists for fieldwork which the user is encouraged to adapt for their own purposes and take into the field to serve as a reminder of best practice. Analysis of hemispherical photographs is covered with an effort to stick to free, open-source, and actively maintained software in order to maximise accessibility, and to ensure that the guide remains relevant into the future.
 
 \section{What is hemispherical photography?}
@@ -132,6 +137,54 @@ where $\theta$ is the angular field of view in degrees, $h$ is the height from t
 	\caption{Schematic diagram of the measurements used when calculating the minimum distance between hemispherical photo locations.}
 	\label{canopy_trig}
 \end{figure}
+
+\subsection{Setting the focus to infinity} 
+
+My assumption has always been that when taking hemispherical photos of forest canopies, the focus of the lens should always be set to infinity. While this knowledge is repeated throughout the literature, it is difficult to find much discussion on \textit{why} this is the case. What follows is a series of quotes from the literature relating on the discussion of setting the lens focus to infinity.
+
+\begin{minipage}{\linewidth}
+\begin{framed}
+We used a Nikon MF-16 camera and a Nikkor 8-mm fish-eye lens with TriX ASA 400 film, a red filter to increase sharpness of leaf edges, and the \textit{focus set to infinity}.
+
+-- \citealt{Englund2000}
+\end{framed}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{framed}
+The lens was set to a small aperture and \textit{focused on infinity} (Frazer et al. 2001; Zhu et al. 2003)
+
+-- \citealt{Hu2009}
+\end{framed}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{framed}
+Exposure settings were selected to obtain the best contrast between foliage and sky and making the last one appear white (cloudy sky offers the best condition in this context). The camera was used in automatic mode using the parameters fixed in FISHEYE1 lens mode (\textit{focus set to infinity}, widest zoom, metering center-weighted), and the shutter speed was varied automatically by the camera.
+
+-- \citealt{Paletto2009}
+\end{framed}
+\end{minipage}
+
+This next quote comes from a paper which many others reference when describing proper protocol for taking hemispherical photos: 
+
+\begin{minipage}{\linewidth}
+\begin{framed}
+Unlike the Nikon F, the digital camera did not allow full manual control of both the shutter speed and lens aperture. We therefore \textit{set the autofocus, exposure mode, and f-stop of the digital camera to infinity}, aperture priority (shutter speed is set automatically by the camera), and f/2.6, respectively. 
+
+-- \citealt{Frazer2001}
+\end{framed}
+\end{minipage}
+
+While this paper is one of the most respected guides on hemispherical photography, it references an unconventional source when describing the practice of setting the focus to infinity. A downloadable tutorial series on taking high-quality digital photos, called 123di \citep{}. Most of this resource is behind a paywall, so I can't read the applicable bit. Importantly however, this paper references \textit{why} the authors set the focus to infinity, because the depth of field is practically infinite under these conditions.
+
+\begin{minipage}{\linewidth}
+\begin{framed}
+Photographic images were recorded using a Sigma 8 mm f/4 fisheye lens (Sigma Corporation, Tokyo, Japan) at the highest possible resolution (3040-2008 pixels) with highest ISO setting (ISO 200). Moreover, \textit{the focus ring was set to infinity when using the fisheye lens, as depth of field is practically infinite and focusing was not required (Bockaert, 2004).}
+
+-- \citealt{Jonckheere2005}
+\end{framed}
+\end{minipage}
 
 \section{Processing hemispherical photographs}
 
@@ -502,54 +555,6 @@ for(i in 1:length(img_file_list)){
 12. Finally, look at the output, which is stored in \verb|all_data|.
 
 There are many other functions in the source code for Hemiphot and I recommend reading through them along with the documentation to see what is right for your needs. A copy of the script above is included in \file{hemiphot\_example.R}.
-
-\subsection{Setting the focus to infinity} 
-
-My assumption has always been that when taking hemispherical photos of forest canopies, the focus of the lens should always be set to infinity. While this knowledge is repeated throughout the literature, it is difficult to find much discussion on \textit{why} this is the case. What follows is a series of quotes from the literature relating on the discussion of setting the lens focus to infinity.
-
-\begin{minipage}{\linewidth}
-\begin{framed}
-We used a Nikon MF-16 camera and a Nikkor 8-mm fish-eye lens with TriX ASA 400 film, a red filter to increase sharpness of leaf edges, and the \textit{focus set to infinity}.
-
--- \citealt{Englund2000}
-\end{framed}
-\end{minipage}
-
-\begin{minipage}{\linewidth}
-\begin{framed}
-The lens was set to a small aperture and \textit{focused on infinity} (Frazer et al. 2001; Zhu et al. 2003)
-
--- \citealt{Hu2009}
-\end{framed}
-\end{minipage}
-
-\begin{minipage}{\linewidth}
-\begin{framed}
-Exposure settings were selected to obtain the best contrast between foliage and sky and making the last one appear white (cloudy sky offers the best condition in this context). The camera was used in automatic mode using the parameters fixed in FISHEYE1 lens mode (\textit{focus set to infinity}, widest zoom, metering center-weighted), and the shutter speed was varied automatically by the camera.
-
--- \citealt{Paletto2009}
-\end{framed}
-\end{minipage}
-
-This next quote comes from a paper which many others reference when describing proper protocol for taking hemispherical photos: 
-
-\begin{minipage}{\linewidth}
-\begin{framed}
-Unlike the Nikon F, the digital camera did not allow full manual control of both the shutter speed and lens aperture. We therefore \textit{set the autofocus, exposure mode, and f-stop of the digital camera to infinity}, aperture priority (shutter speed is set automatically by the camera), and f/2.6, respectively. 
-
--- \citealt{Frazer2001}
-\end{framed}
-\end{minipage}
-
-While this paper is one of the most respected guides on hemispherical photography, it references an unconventional source when describing the practice of setting the focus to infinity. A downloadable tutorial series on taking high-quality digital photos, called 123di \citep{}. Most of this resource is behind a paywall, so I can't read the applicable bit. Importantly however, this paper references \textit{why} the authors set the focus to infinity, because the depth of field is practically infinite under these conditions.
-
-\begin{minipage}{\linewidth}
-\begin{framed}
-Photographic images were recorded using a Sigma 8 mm f/4 fisheye lens (Sigma Corporation, Tokyo, Japan) at the highest possible resolution (3040-2008 pixels) with highest ISO setting (ISO 200). Moreover, \textit{the focus ring was set to infinity when using the fisheye lens, as depth of field is practically infinite and focusing was not required (Bockaert, 2004).}
-
--- \citealt{Jonckheere2005}
-\end{framed}
-\end{minipage}
 
 \subsection{Zenith angle for LAI calculations} \label{fov}
 
