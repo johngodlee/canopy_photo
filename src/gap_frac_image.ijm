@@ -17,7 +17,8 @@ for (i=0; i<(list.length); i++) {
 	if (binarize_first=="TRUE"){
 		run("8-bit");
 		setAutoThreshold(algorithm);
-		setOption("BlackBackground", false);
+		setOption("BlackBackground", true);
+		run("Invert LUT");
 		run("Convert to Mask");
 	}
 	run("Invert");

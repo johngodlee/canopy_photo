@@ -15,7 +15,8 @@ for (i=0; i<(list.length); i++) {
 	file_name = getInfo("image.filename");
 	run("8-bit");
 	setAutoThreshold(algorithm);
-	setOption("BlackBackground", false);
+	setOption("BlackBackground", true);
+	run("Invert LUT");
 	run("Convert to Mask");
 	saveAs("tif", ""+output_path+file_name+"");
 	image_id = getImageID();
