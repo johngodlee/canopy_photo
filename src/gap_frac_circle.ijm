@@ -22,7 +22,6 @@ for (i=0; i<(list.length); i++) {
 		run("Invert LUT");
 		run("Convert to Mask");
 	}
-	run("Invert");
 	makeOval((getWidth/2) - (0.5 * circle_diam),
 		(getHeight/2) - (0.5 * circle_diam),
 		circle_diam,

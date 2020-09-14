@@ -21,7 +21,6 @@ for (i=0; i<(list.length); i++) {
 		run("Invert LUT");
 		run("Convert to Mask");
 	}
-	run("Invert");
 	file_name = getInfo("image.filename");
 	run("Analyze Particles...", "summarize");
 	image_id = getImageID();
