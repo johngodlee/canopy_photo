@@ -4,9 +4,9 @@
 // User inputs
 ///////////////////////////////////
 
-input_path = "/Users/johngodlee/Desktop/input/";
+input_path = "/Users/username/Desktop/input/";
 
-output_path = "/Users/johngodlee/Desktop/output/";
+output_path = "/Users/username/Desktop/output/";
 
 dpi = 300;
 

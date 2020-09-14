@@ -2,8 +2,8 @@
 
 // User inputs
 ///////////////////////////////////
-input_path = "/Users/johngodlee/Desktop/input/";
-output_path = "/Users/johngodlee/Desktop/output/";
+input_path = "/Users/username/Desktop/input/";
+output_path = "/Users/username/Desktop/output/";
 circle_diam = 3925
 binarize_first = "TRUE"
 // Only set to "FALSE" if a binarized `.tif` is used
