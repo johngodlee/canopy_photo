@@ -2,14 +2,18 @@
 
 \usepackage{mynotes}
 \usepackage{framed}
+\usepackage{enumitem}
+\setitemize{itemsep=0.5pt}
 
 \renewcommand{\lstlistingname}{Code}
 
 \newcommand\menu[1]{\texttt{\color{blue}#1}}
 \newcommand\file[1]{\texttt{\underline{#1}}}
 
+\addbibresource{hemi_photo_guide.bib}
+
 \title{Hemispherical photography for the estimation of woodand canopy traits}
-\date{2019-10-22}
+\date{2020-09-16}
 \author{John L. Godlee}
 
 \begin{document}
@@ -34,8 +38,16 @@ Hemispherical photographs can be analysed in multiple ways to provide different 
 \begin{itemize}
 	\item{Gap fraction (site factor) - Proportional coverage of plant canopy material as viewed from a single point with some given angular field of view (\%).}
 	\item{Canopy cover - Proportional coverage of plant canopy material per unit ground area covered (\%).}
+	\item{Canopy closure - Proportion of sky hemisphere obscured by vegetation when viewed from a single point. AKA Site Factor \citep{Anderson1964}.}
 	\item{Leaf/Plant Area Index (LAI/PAI) - Area of leaf (LAI) or plant (PAI) per unit ground area (m\textsuperscript{2} m\textsuperscript{-2}).}
 \end{itemize}
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=\textwidth]{closure.drawio.pdf}
+	\caption{Canopy cover (left), measured as the vertical projection of tree material onto the ground, compared with canopy closure (right), measured as the sky obscured by trees as measured from a single point (Adapted from \citealt{Jennings1999}).}
+	\label{closure}
+\end{figure}
 
 \section{Hemispherical photos in the field}
 
@@ -58,7 +70,7 @@ Some common issues which create bias in results:
 	\label{lens_flare}
 \end{figure}
 
-Capturing the right image relies on manual adjustment of three key camera settings to balance the image exposure and sharpness:
+There is no standard protocol for hemispherical photography, capturing the right image relies on manual adjustment of three key camera settings to balance the image exposure and sharpness:
 
 \begin{itemize}
 	\item{Shutter speed}
@@ -69,11 +81,11 @@ Capturing the right image relies on manual adjustment of three key camera settin
 Below is a checklist to guide you in taking informative hemispherical photographs: 
 
 \begin{itemize}
-	\item{Take photos under a uniformly overcast sky where possible, ideally before the sun has risen too high in the sky, or just before sunset, this avoids lens flare and helps to increase the contrast between plant material and sky. I find in the morning the photos are generally better due to the quality of the light and the generally more consistent cloud cover. At high latitudes you will have a longer suitable period to capture photos than in the tropics.}
+	\item{Take photos under a uniformly overcast sky where possible, ideally before the sun has risen high in the sky, or just before sunset. This avoids lens flare and increases contrast between plant and sky. In the morning the photos are generally better due to the quality of the light and the generally more consistent cloud cover. At high latitudes you will have a longer suitable period to capture photos than in the tropics.}
 	\item{Ensure that the camera is level on the tripod and the lens is pointing straight up. Use a spirit level attached to the camera hotshoe to do this.}
 	\item{Adjust the tripod so that the top of the camera lens is 1 m above the ground, or above any understorey vegetation you wish to exclude from the analysis, whichever is higher.} 
 	\item{Turn the camera so the top of the camera body is facing north, bring a compass! This ensures that the top of the captured photo is also facing north, which is necessary for calculating LAI.}
-	\item{Make use of the visual display on the camera, if there is one, to get a good view of the photo before you take it.}
+	\item{Make use of the camera's visual display, if there is one, to get a good view of the photo before you take it.}
 	\item{Set the camera:}
 		\begin{itemize}
 			\item{Manual shooting mode}
@@ -577,6 +589,12 @@ In the range from zero to about 60 zenith angle the canopy effects are more sign
 
 There are a number of other ways to measure the same canopy traits for which hemispherical photography is commonly used, such as gap fraction. Additionally, some tree canopy traits are best measured with something other than hemispherical photography, or are impossible to measure with hemispherical photography.
 
+\subsection{Digital Cover Photography}
+
+Measurements derived from hemispherical photography are highly sensitive to image acquisition and processing methods. Additionally, hemispherical photography equipment can be expensive.
+
+Digital cover photography (DCP) utilises flat images taken using a conventional camera lens. DCP was first used by \citet{Macfarlane2007a, Macfarlane2007b, Macfarlane2007c}. DCP has a higher sampling resolution closer to zenith, becuase the image is taken with a flat lens. DCP requires independent lead inclination angle to estimate LAI, but can be more appropriate for estimating canopy cover in certain circumstances. Canopy closure cannot be estimated with DCP, but it can be modelled with an allometric equation if hemispherical photography equipment is available.
+
 \subsection{LiCOR LAI-2000}
 
 A device operating on a similar principle to hemispherical photography, which processes an image and provides a percentage canopy cover estimate. Measurements are paired with replicates taken simultaneously under an open sky to normalise changing light conditions.
@@ -601,6 +619,7 @@ A leaf trap of known dimensions is left on the forest floor for a known period o
 
 Branches within a known area of canopy are harvested and the leaves removed. The area of these individual leaves is measured to directly measure the total leaf area of the canopy.
 
-\bibliography{hemi_photo_guide.bib}
+
+\printbibliography
 
 \end{document}
