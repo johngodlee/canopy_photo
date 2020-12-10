@@ -203,7 +203,7 @@ Photographic images were recorded using a Sigma 8 mm f/4 fisheye lens (Sigma Cor
 
 \section{Processing hemispherical photographs}
 
-There are many proprietary options for processing and analysing forest canopy traits from hemispherical photographs, e.g. WinScanopy, CAN-EYE. I think processing with freely available tools is more flexible, reproducible, and fuure-proof, and should be preferred for peer-reviewed research. This part of the guide demonstrates a workflow for processing hemispherical photos using ImageJ v1.x \citep{Schneider2012}.
+There are many proprietary options for processing and analysing forest canopy traits from hemispherical photographs, e.g. WinScanopy, CAN-EYE. I think processing with freely available tools is more flexible, reproducible, and future-proof, and should be preferred for peer-reviewed research. This part of the guide demonstrates a workflow for processing hemispherical photos using ImageJ v1.x \citep{Schneider2012}.
 
 \subsection{Differentiating between plant and sky}
 
@@ -260,7 +260,7 @@ where $R$ is the radial position of a point on the image on the sensor, $f$ is t
 	\label{fov_diagram}
 \end{figure}
 
-The lens in the ``ideal product list'' (Sigma 8 mm) uses an equisolid projection. Below is a function written in the R programing language which will provide the radius of the circle in pixels for a desired angular field of view for the equisolid projection (\autoref{fov_func}).
+The lens in the ``ideal product list'' (Sigma 8 mm) uses an equisolid projection. Below is a function written in the R programming language which will provide the radius of the circle in pixels for a desired angular field of view for the equisolid projection (\autoref{fov_func}).
 
 \begin{minipage}{\linewidth}
 \lstinputlisting[language=R, label=fov_func, firstline=18, lastline=32, caption=R function to calculate the pixel radius of a circle with a given zenith angle. Also found in \file{fov\_func.R} in the supplementary materials.]{src/fov_func.R}
@@ -372,7 +372,7 @@ There are a number of other ways to measure the same canopy traits for which hem
 
 Measurements derived from hemispherical photography are highly sensitive to image acquisition and processing methods. Additionally, hemispherical photography equipment can be expensive.
 
-Digital cover photography (DCP) utilises flat images taken using a conventional camera lens. DCP was first used by \citet{Macfarlane2007a, Macfarlane2007b, Macfarlane2007c}. DCP has a higher sampling resolution closer to zenith, becuase the image is taken with a flat lens. DCP requires independent lead inclination angle to estimate LAI, but can be more appropriate for estimating canopy cover in certain circumstances. Gap fraction cannot be estimated with DCP, but it can be modelled with an allometric equation if hemispherical photography equipment is available.
+Digital cover photography (DCP) utilises flat images taken using a conventional camera lens. DCP was first used by \citet{Macfarlane2007a, Macfarlane2007b, Macfarlane2007c}. DCP has a higher sampling resolution closer to zenith, because the image is taken with a flat lens. DCP requires independent lead inclination angle to estimate LAI, but can be more appropriate for estimating canopy cover in certain circumstances. Gap fraction cannot be estimated with DCP, but it can be modelled with an allometric equation if hemispherical photography equipment is available.
 
 \subsection{LiCOR LAI-2000}
 
