@@ -1,27 +1,18 @@
-// Calculate the gap fraction of a circular selection of an image
-
-// User inputs
+// START user input
 ///////////////////////////////////
-input_path = "/Users/username/Desktop/input/";
-output_path = "/Users/username/Desktop/output/";
+input = "/Users/username/Desktop/input/";
+output = "/Users/username/Desktop/output/";
 circle_diam = 3925
-binarize_first = "TRUE"
-// Only set to "FALSE" if a binarized `.tif` is used
 algorithm = "Default"
 ///////////////////////////////////
-// END user inputs
+// END user input
 
-list = getFileList(input_path);
+setBatchMode(true);
+
+list = getFileList(input);
 
 for (i=0; i<(list.length); i++) {
-	open(""+input_path+list[i]+"");
-	if (binarize_first=="TRUE"){
-		run("8-bit");
-		setAutoThreshold("Default");
-		setOption("BlackBackground", true);
-		run("Invert LUT");
-		run("Convert to Mask");
-	}
+	open(""+input+list[i]+"");
 	makeOval((getWidth/2) - (0.5 * circle_diam),
 		(getHeight/2) - (0.5 * circle_diam),
 		circle_diam,

@@ -227,60 +227,15 @@ In order to calculate various woodland canopy traits it is necessary to partitio
 The above process can be automated with an ImageJ macro (\autoref{binarize}), but this removes the ability to manually threshold each image, relying instead on a number of binarization algorithms provided in ImageJ. This technique should only be used when you are confident that all images are consistently exposed. Macros should be saved as a \file{.ijm} file and called within ImageJ with \menu{Plugins $\rightarrow$ Macros $\rightarrow$ Run..}. For a full list of macro functions available in ImageJ, consult the documentation (\url{https://imagej.nih.gov/ij/developer/macro/functions.html}). 
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[label=binarize,caption=ImageJ macro to binarize all images in a nominated directory. The macro can also be found in \file{binarize.ijm} in the supplementary material.]
-// User inputs
-///////////////////////////////////
-input_path = "/Users/username/Desktop/input/";
-output_path = "/Users/username/Desktop/output/";
-algorithm = "Default";
-///////////////////////////////////
-// END user inputs
-
-list = getFileList(input_path);
-
-for (i=0; i<(list.length); i++) {
-	open(""+input_path+list[i]+"");
-	file_name = getInfo("image.filename");
-	run("8-bit");
-	setAutoThreshold(algorithm);
-	setOption("BlackBackground", true);
-	run("Invert LUT");
-	run("Convert to Mask");
-	saveAs("tif", ""+output_path+file_name+"");
-	image_id = getImageID();
-	selectImage(image_id);
-	close();
-}
-\end{lstlisting}
+\lstinputlisting[label=binarize,caption=ImageJ macro to binarize all images in a nominated directory. The macro can also be found in \file{binarize.ijm} in the supplementary material.]{src/binarize.ijm}
 \end{minipage}
 
 I find that the \verb|Huang| \citep{Huang1995} binarization algorithm normally works well for thresholding canopy photos, but you should experiment with different algorithms to find the one which works best for your data. \verb|Default| is also widely appropriate for canopy photos.
 
-An alternative to simple thresholding of 8-bit greyscale images is to use a colour thresholding technique. Plant material often reflects very little blue, while the sky generally has much more, so one can threshold using only the blue channel of the image (\citealt{Brusa2014}, \autoref{binarize_blue_channel}).
+An alternative to simple thresholding of 8-bit greyscale images is to use a colour thresholding technique. Plant material often reflects very little blue, while the sky generally has much more, so one can threshold using only the blue channel of the image (\citealt{Brusa2014}, \autoref{binarize_blue}).
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[label=binarize_blue_channel, caption=ImageJ macro to binarize images by the blue colour channel. The macro can also be found in \file{binarize\_blue\_channel.ijm}.]
-// User inputs
-///////////////////////////////////
-input_path = "/Users/username/Desktop/input/";
-output_path = "/Users/username/Desktop/output/";
-algorithm = "Default";
-///////////////////////////////////
-// END user inputs
-
-list = getFileList(input_path);
-
-for (i=0; i<(list.length); i++){
-	open(""+input_path+list[i]+"");
-	file_name = getInfo("image.filename");
-	run("Split Channels");
-	selectWindow(file_name+" (blue)");
-	setAutoThreshold(algorithm);
-	run("Convert to Mask");
-	saveAs("tif", ""+output_path+"blue_"+file_name+"");
-	close("*");
-}
-\end{lstlisting}
+\lstinputlisting[label=binarize_blue, caption=ImageJ macro to binarize images by the blue colour channel. The macro can also be found in \file{binarize\_blue\_channel.ijm}.]{src/binarize_blue.ijm}
 \end{minipage}
 
 \subsection{Cropping a circular image} \label{circle}
@@ -306,29 +261,7 @@ where $R$ is the radial position of a point on the image on the sensor, $f$ is t
 The lens I use (Sigma 8 mm) uses an equisolid projection, so I can use the equation above to create a function in the R programing language which will give me the radius of the circle in pixels for a desired angular field of view (\autoref{fov_func}).
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[language=R, label=fov_func, caption=R function to calculate the pixel radius of a circle with a given zenith angle. Also found in \file{fov\_func.R} in the supplementary materials.]
-fov.px <- function(deg_theta, focal_length_mm, pixel_pitch_um){
-  # Convert degrees of theta to radians
-  rads_theta <- NISTunits::NISTdegTOradian(deg_theta) 
-  
-  # Calculate radius of circle drawn by angle of view 
-  # (rads_theta and max_rads_theta) in mm projected onto the sensor plane
-  R <-  2 * focal_length_mm * sin(rads_theta / 2)
-  
-  # Calculate the px per mm on the sensor, i.e. the pixel pitch
-  sensor_px_per_mm_flat <- 1/pixel_pitch_um * 1000
-  
-  # Multiply the mm radius of the desired circle by the number of 
-  # pixels per mm on the sensor, to get the number of pixels radius 
-  # of the desired circle
-  pixels_for_theta <- round(R * sensor_px_per_mm_flat, 0)
-  
-  return(pixels_for_theta)
-}
-
-# Run the function
-fov.px(90, 8, 5.95)
-\end{lstlisting}
+\lstinputlisting[language=R, label=fov_func, firstline=18, lastline=32, caption=R function to calculate the pixel radius of a circle with a given zenith angle. Also found in \file{fov\_func.R} in the supplementary materials.]{src/fov_func.R}
 \end{minipage}
 
 The pixel pitch of the sensor is the real distance (in $\mu$m) from the centre of one pixel on the sensor to the centre of the next, in my case it's 5.95 um. This information can generally be found by querying the technical specifications for the camera, which may be available from the manufacturer or possibly found on online forums.
@@ -336,19 +269,7 @@ The pixel pitch of the sensor is the real distance (in $\mu$m) from the centre o
 Similarly, I made a function to calculate the angular field of view of an already cropped circular image, by solving the equation for $\theta$ (\autoref{fov_theta}). 
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[language=R, label=fov_theta, caption=R function to calculate the zenith angle from a cropped circular image. Also found in \file{fov\_func.R} in the supplementary materials.]
-fov.theta <- function(prop_crop, full_circle_radius_px, focal_length_mm, pixel_pitch_um){
-  # Calculate number of pixels in the radius of the crop
-  px_crop <- full_circle_radius_px * prop_crop
-  
-  # Calculate radius
-  theta <- 2 * asin(((pixel_pitch_um * px_crop) / (2 * focal_length_mm * 1000)))
-  
-  deg_theta <- round(NISTradianTOdeg(theta), 2)
-  
-  return(deg_theta)
-}
-\end{lstlisting}
+\lstinputlisting[language=R, label=fov_theta, firstline=48, lastline=58, caption=R function to calculate the zenith angle from a cropped circular image. Also found in \file{fov\_func.R} in the supplementary materials.]{src/fov_func.R}
 \end{minipage}
 
 \subsection{Calculating gap fraction with ImageJ}
@@ -375,200 +296,57 @@ To calculate gap fraction:
 \autoref{gap_frac_image} performs the same process but for a folder of images and exports a \file{.csv} spreadsheet file of the results. Remember to change the user inputs to point to where you would like images to be opened from and the spreadsheet saved to.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[label=gap_frac_image, caption=ImageJ macro to calculate the gap fraction of a full image. The macro can also be found in \file{gap\_frac\_image.ijm}.]
-// User inputs
-///////////////////////////////////
-input_path = "/Users/username/Desktop/input/";
-output_path = "/Users/username/Desktop/output/";
-binarize_first = "TRUE";
-// Only set to "FALSE" if a binarized '.tif' is used
-algorithm = "Default";
-///////////////////////////////////
-// END user inputs
-
-list = getFileList(input_path);
-
-for (i=0; i<(list.length); i++) {
-	open(""+input_path+list[i]+"");
-	if (binarize_first=="TRUE"){
-		run("8-bit");
-		setAutoThreshold(algorithm);
-		setOption("BlackBackground", true);
-		run("Invert LUT");
-		run("Convert to Mask");
-	}
-	run("Invert");
-	file_name = getInfo("image.filename");
-	run("Analyze Particles...", "summarize");
-	image_id = getImageID();
-	selectImage(image_id);
-	close();
-	roiManager("reset");
-}
-
-selectWindow("Summary"); 
-saveAs("Results", ""+output_path+"results.csv"); 
-run("Close");
-\end{lstlisting}
+\lstinputlisting[label=gap_frac_image, caption=ImageJ macro to calculate the gap fraction of a full image. The macro can also be found in \file{gap\_frac\_image.ijm}.]{src/gap_frac_image.ijm}
 \end{minipage}
 
 The process is similar for a circular image such as that taken with a full frame camera and a fisheye lens, except you draw a circle selection to exclude the black uninformative bits of the image before running \menu{Analyze Particles...}. See \autoref{gap_frac_circle} for the macro. 
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[label=gap_frac_circle, caption=ImageJ macro to calculate the gap fraction of a circular selection of an image. The macro can also be found in \file{gap\_frac\_circle.ijm}.]
-// User inputs
-///////////////////////////////////
-input_path = "/Users/username/Desktop/input/";
-output_path = "/Users/username/Desktop/output/";
-circle_diam = 3925;
-binarize_first = "TRUE";
-// Only set to "FALSE" if a binarized `.tif` is used
-algorithm = "Default";
-///////////////////////////////////
-// END user inputs
-
-list = getFileList(input_path);
-
-for (i=0; i<(list.length); i++) {
-	open(""+input_path+list[i]+"");
-	if (binarize_first=="TRUE"){
-		run("8-bit");
-		setAutoThreshold("Default");
-		setOption("BlackBackground", true);
-		run("Invert LUT");
-		run("Convert to Mask");
-	}
-	run("Invert");
-	makeOval((getWidth/2) - (0.5 * circle_diam),
-		(getHeight/2) - (0.5 * circle_diam),
-		circle_diam,
-		circle_diam);
-	file_name = getInfo("image.filename");
-	run("Analyze Particles...", "summarize");
-	image_id = getImageID();
-	selectImage(image_id);
-	close();
-	roiManager("reset");
-}
-
-selectWindow("Summary"); 
-saveAs("Results", ""+output_path+"results.csv"); 
-run("Close");
-\end{lstlisting}
+\lstinputlisting[label=gap_frac_circle, caption=ImageJ macro to calculate the gap fraction of a circular selection of an image. The macro can also be found in \file{gap\_frac\_circle.ijm}.]{src/gap_frac_circle.ijm}
 \end{minipage}
 
 The circular diameter of the image to fill \verb|circle_diam| can be measured in ImageJ by selecting \menu{Straight Line} from the toolbar then drawing a straight line across the centre of the circular image. Then select \menu{Analyze $\rightarrow$ Measure} to get the length of the line in the Results table. Alternatively, use the methods presented above in \autoref{circle} to crop the circular image to a particular angle of view, to exclude parts of the image closer to the ground.
 
 \subsection{Calculating Leaf Area Index}
 
-This part of the guide relies mostly on code written by Hans ter Steege's HemiPhot package \citep{Steege2018}, which ports WinPhot into the R language. Winphot was originally written by Hans ter Steege in 1997, and Hemiphot can be seen as the natural progression of this software. Winphot is now obsolete and has been unmaintained since Windows XP. The code includes functions for thresholding and binarizing images, but I prefer to do this step in ImageJ prior to analysing the images in R, because I like I have more control over how the images are thresholded this way.
+This part of the guide relies mostly on code written by Hans ter Steege's HemiPhot package \citep{Steege2018}, which ports WinPhot into the R language. Winphot was originally written by Hans ter Steege in 1997, and Hemiphot can be seen as the natural progression of this software. Winphot is now obsolete and has been unmaintained since Windows XP. The code includes functions for thresholding and binarizing images, but I prefer to do this step in ImageJ prior to analysing the images in R, because I like I have more control over how the images are thresholded this way. The snippets below describe a workflow for processing multiple images in Hemiphot using R:
 
-The workflow below assumes you are using RStudio, but you can use the scripts in any R programming environment. 
-
-\begin{enumerate}
-	\item{Open RStudio}
-	\item{Open a new script (\menu{File $\rightarrow$ New File $\rightarrow$ R Script})}
-	\item{Save the script in a folder above the images folder}
-	\item{Enter the following preamble into the R script}
-\end{enumerate}
-
+\vspace{0.5cm}
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
-# Set working directory to location of thresholded images
-setwd("LOCATION_OF_ANALYSIS")
-
-# Source the functions used to calculate stuff
-source("hemiphot.R")
-\end{lstlisting}
+0. Preamble, load packages and functions.
+\lstinputlisting[language=R, linerange=5-8]{src/hemiphot_example.R}
 \end{minipage}
 
-5. Read in all the previously thresholded and binarized \file{.tif} images and create an empty data frame which will later be filled with canopy trait statistics like LAI and canopy openness.
-
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
-# Load images from directory 
-img_file_list <- list.files("test_img", pattern = ".tif", full.names = TRUE)
-
-img_list <- lapply(img_file_list, readTIFF)
-
-# Create empty dataframe, 6x7 and fill it with zeroes
-all_data = data.frame(matrix(data = 0, nrow = length(img_file_list), ncol = 7))
-names(all_data) = c("File", "CanOpen", "LAI", "DirectAbove", 
-	"DiffAbove", "DirectBelow", "DiffBelow")
-# Fill first column with image names
-all_data[,1] = img_file_list 
-\end{lstlisting}
+1. Read in all the previously thresholded and binarized \file{.tif} images and create an empty data frame which will later be filled with canopy trait statistics like LAI and canopy openness.
+\lstinputlisting[language=R, linerange=10-21]{src/hemiphot_example.R}
 \end{minipage}
 
-6. Set some parameters for the location the photos are being taken. Approximate location (0.1 degrees latitude) is good enough for our purposes. Note that the values below are for somewhere in Africa and should be changed:
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
-location.latitude   = -15
-location.altitude   = 200
-location.day        = 30
-location.days       = seq(15,360,30)   # roughly the middle of each month of the year 
-\end{lstlisting}
+2. Set some parameters for the location the photos are being taken. Approximate location (0.1 degrees latitude) is good enough for our purposes. Note that the values below are for somewhere in Africa and should be changed:
+\lstinputlisting[language=R, linerange=23-27]{src/hemiphot_example.R}
 \end{minipage}
 
-7. Set some parameters for the images, cropping them to a circle and setting the threshold. Even if the images have been thresholded already, thresholding them again won't change anything. These parameters are ones I have used on my camera (Nikon D750 with Sigma 8 mm equisolid fisheye lens), so may need to be changed depending on your equipment:
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
-location.cx <- dim(img_list[[1]])[2] / 2  # x coordinate of center
-location.cy <- dim(img_list[[1]])[1] / 2  # y coordinate of center
-location.cr <- fov.px(60, 8, 5.95)  # Circle radius of interest
-\end{lstlisting}
+3. Set some parameters for the images, cropping them to a circle and setting the threshold. Even if the images have been thresholded already, thresholding them again won't change anything. These parameters are ones I have used on my camera (Nikon D750 with Sigma 8 mm equisolid fisheye lens), so may need to be changed depending on your equipment:
+\lstinputlisting[language=R, linerange=29-32]{src/hemiphot_example.R}
 \end{minipage}
 
-10. Set some atmospheric parameters. The metrics affected by these parameters are: \verb|DirectAbove|, \verb|DiffAbove|, \verb|DirectBelow| and \verb|DiffBelow|. If these metrics are of no interest to you, just fill these parameters with random decimals between zero and one.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
-# Atmospheric transmissivity
-# Normally set at 0.6, but can vary between 0.4-0.6 in the tropics
-location.tau = 0.6
-
-# Amount of direct light that is used as diffuse light in the Uniform Ovecast Sky (UOC)
-location.uoc = 0.15
-\end{lstlisting}
+4. Set some atmospheric parameters. The metrics affected by these parameters are: \verb|DirectAbove|, \verb|DiffAbove|, \verb|DirectBelow| and \verb|DiffBelow|. If these metrics are of no interest to you, just fill these parameters with random decimals between zero and one.
+\lstinputlisting[language=R, linerange=34-38]{src/hemiphot_example.R}
 \end{minipage}
 
-11. Run a big for loop to calculate the statistics for each photo
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[language=R]
-for(i in 1:length(img_file_list)){
-  # read file
-  image <- readTIFF(img_file_list[i])
-  
-  # convert to Hemi image
-  image <- Image2Hemiphot(image)
-  
-  # set circle parameters
-  image <- SetCircle(image, cx = location.cx, cy = location.cy, cr = location.cr)
-  
-  gap.fractions <- CalcGapFractions(image)
-  all_data[i,2] = CalcOpenness(fractions = gap.fractions)
-  
-  # calculate LAI according to Licor's LAI Analyzer 
-  all_data[i,3] = CalcLAI(fractions = gap.fractions)
-  
-  # Photosynthetic Photon Flux Density (PPDF, umol m-1 s-1) P
-  rad <- CalcPAR.Day(im = image,
-    lat = location.latitude, d = days,
-    tau = location.tau, uoc = location.uoc, 
-    draw.tracks = F, full.day = F)
-
-  all_data[i,4] = rad[1]
-  all_data[i,5] = rad[2]
-  all_data[i,6] = rad[3]
-  all_data[i,7] = rad[4]
-}
-\end{lstlisting}
+5. Run a \verb|for| loop to calculate statistics for each photo.
+\lstinputlisting[language=R, linerange=40-67]{src/hemiphot_example.R}
 \end{minipage}
 
-12. Finally, look at the output, which is stored in \verb|all_data|.
+6. Finally, look at the output, which is stored in \verb|all_data|.
 
 There are many other functions in the source code for Hemiphot and I recommend reading through them along with the documentation to see what is right for your needs. A copy of the script above is included in \file{hemiphot\_example.R}.
 

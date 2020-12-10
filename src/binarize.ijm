@@ -1,5 +1,3 @@
-// Binarize all images with a given algorithm and save
-
 // User inputs
 ///////////////////////////////////
 input_path = "/Users/username/Desktop/input/";
