@@ -1,7 +1,9 @@
-\documentclass{article}
+\documentclass[11pt,a4paper]{article}
 
 \usepackage{mynotes}
-\usepackage{framed}
+
+\graphicspath{ {img/} }  % Define image path
+
 \usepackage{enumitem}
 \setitemize{itemsep=0.5pt}
 
@@ -248,8 +250,15 @@ Sometimes, it's desirable to crop a hemispherical photo to a smaller circle with
 	\item{Equisolid (equal area) - $R = 2f\sin{(\theta/2)}$}
 	\item{Equidistant - $R = f\theta$}
 	\item{Orthographic - $R = f\sin{(\theta)}$}
+	\item{Stereographic - $R = 2f\tan{(\theta/2)}$}
 	\item{Thoby fisheye - $R = 1.47f\sin{(0.713\theta)}$}
 \end{itemize}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{lens_proj}
+	\caption{Comparison of common fisheye lens projection functions.}
+	\label{lens_proj}
+\end{figure}
 
 where $R$ is the radial position of a point on the image on the sensor, $f$ is the focal length of the lens, and $\theta$ is the angle in radians of the desired angular radius of the cropped image. Here is a diagram of what those values equate to on the camera lens.
 
@@ -260,7 +269,7 @@ where $R$ is the radial position of a point on the image on the sensor, $f$ is t
 	\label{fov_diagram}
 \end{figure}
 
-The lens in the ``ideal product list'' (Sigma 8 mm) uses an equisolid projection. Below is a function written in the R programming language which will provide the radius of the circle in pixels for a desired angular field of view for the equisolid projection (\autoref{fov_func}).
+The lens in the ``ideal product list'' (Sigma 8 mm) uses an equisolid projection. Equisolid lenses are preferred for hemispherical photography because they maintain an equal area for each pixel, i.e. a pixel projected through the lens has the same solid angle irrespective of the incident light angle. Below is a function written in the R programming language which will provide the radius of the circle in pixels for a desired angular field of view for the equisolid projection (\autoref{fov_func}).
 
 \begin{minipage}{\linewidth}
 \lstinputlisting[language=R, label=fov_func, firstline=18, lastline=32, caption=R function to calculate the pixel radius of a circle with a given zenith angle. Also found in \file{fov\_func.R} in the supplementary materials.]{src/fov_func.R}

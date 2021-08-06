@@ -1,73 +1,97 @@
 % Declare package name
 \ProvidesPackage{mynotes}  % Give same name as .sty file
 
-% Define page geometry
+% Page geometry
 \usepackage{geometry}
-\geometry{left=2.2cm,
-	right=2.2cm,
-	top=2.2cm,
-	bottom=2cm}
+\geometry{left=2.54cm,
+	right=2.54cm,
+	top=2.54cm,
+	bottom=2.54cm}
 \parskip 0.15cm
 \setlength{\parindent}{0cm}
+
 \usepackage{pdflscape}
 
-% Set font
+% Font
+\usepackage{lmodern}
 \usepackage[T1]{fontenc}
 
-% Image handling
-\usepackage{graphics}  % Insert images easily
+% English language
+\usepackage[utf8]{inputenc}
+\usepackage[UKenglish]{babel}
+\usepackage{csquotes}
+
+% Images 
 \usepackage{graphicx}  % Extended image support
+\usepackage{float}  %  Graphics placement [H] [H!] arguments
+\usepackage{caption}  % Custom captions
+\usepackage{subcaption}  % Compound figures
 
 \makeatletter
 	\g@addto@macro\@floatboxreset\centering  % Automatically centre images (floats)
 \makeatother
 
-\graphicspath{ {img/} }
-\usepackage{float}  %  Graphics placement [H] [H!] arguments
-\usepackage{subfig}  % Compound figures
-
 % Tables
-\usepackage{multirow}
-\usepackage{longtable}
+\usepackage{booktabs}  % Sensible horizontal rules
+\usepackage{array}  % Extended column formats
+\usepackage{multirow}  % Tables with cells split over multiple rows
+\usepackage{longtable}  % Tables spanning multiple pages
 
-% Bibliography management
-\usepackage{natbib}    % Bibliography management - Use author/date citations
-\bibliographystyle{/Users/johngodlee/.texmf/agsmnourl}  % Use custom agsm bibliography template with no URL
-\usepackage{cite}  % Citation options
+% Bibliography 
+\usepackage[natbib, 
+	style=authoryear, 
+	uniquename=false, 
+	uniquelist=false,
+	giveninits=true,
+	dashed=false,
+	maxcitenames=2, 
+	mincitenames=1, 
+	minbibnames=10, 
+	maxbibnames=10, 
+	backend=biber]{biblatex}
+\renewcommand*\finalnamedelim{\addspace\&\space}
 
 % Text formatting
-\usepackage{url} % Allow nice formatting of URLs in text
 
 \usepackage{enumerate}  % Enumerated lists
 
 \usepackage{lineno}  % Line numbers
 
-\usepackage{textcomp}
-\newcommand{\textapprox}{\raisebox{0.5ex}{\texttildelow}}  % Command for a good tilde
+\usepackage{siunitx}  % Units
+\usepackage{amsmath}  % Math symbols
+\usepackage{amssymb}  % Math symbols
 
-\usepackage{siunitx}
-\usepackage{amsmath}
+\usepackage[table]{xcolor}  % text colours
 
-\usepackage{xcolor}
-\newcommand{\todo}[1]{\textcolor{red}{\textbf{#1}}}   % \todo{NOTE TO SELF WRITTEN IN RED}
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{#1}}}   % \todo{NOTE IN RED}
 
-\input{code_format}
+\usepackage{framed}  % Framed boxes
+
+\usepackage{microtype}  % Improved text justification
+
+\usepackage{listings}  % Code input 
+\input{code_format}  % Code styling
 
 % Custom title formatting
 \let\oldtitle\title
-
 \renewcommand{\title}[1]{\oldtitle{\vspace{-1.5cm}#1}}
 
-\usepackage[breaklinks]{hyperref}
+\usepackage{etoolbox}
+\ifundef{\abstract}{}{\patchcmd{\abstract}%
+    {\quotation}{\quotation\noindent\ignorespaces}{}{}}
+
+% Links
+\usepackage[breaklinks, hidelinks]{hyperref}
 \definecolor{links}{RGB}{191,59,72}
 \hypersetup{
 	breaklinks,
-	colorlinks,
 	allcolors=links,
 	linktoc=section,
 	pdfauthor={John L. Godlee}
 }
+
+% Rename sections when cross-linking
 \def\subsectionautorefname{section}
 \def\subsubsectionautorefname{section}
-% \usepackage{biblatex}
+
 
