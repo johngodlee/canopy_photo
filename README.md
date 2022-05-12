@@ -1,6 +1,5 @@
-# A guide to using hemispherical photos for estimation of forest/woodland canopy traits.
+# A collection of notes on using photographic methods to measure forest/woodland canopy structure.
 
-This repository contains a guide on hemispherical photography (`hemiphoto_guide.pdf`), with associated R code and ImageJ macros that I have produced while learning about hemispherical photography methods for estimating tree canopy traits.
-
-* `img/` contains various images used in the guide
-* `src/` contains a number of ImageJ macro scripts R code, the Hemiphot codebase, and schematic diagrams used as supplementary materials in the guide.
+* `photo_notes.pdf` is the compiled pdf of the notes
+* `img/` contains images used in the compiled pdf
+* `src/` contains ImageJ macro scripts, R code, the Hemiphot code, and source code for schematic diagrams.
