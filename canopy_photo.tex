@@ -63,7 +63,7 @@
 \usepackage{microtype}  % Improved text justification
 \usepackage{listings}  % Code input 
 \renewcommand{\lstlistingname}{Code}  % Rename code chunks
-\newcommand\menu[1]{\texttt{\color{blue}#1}  % define in-line code formatting
+\newcommand\menu[1]{\texttt{\color{blue}#1}}  % define in-line code formatting
 \newcommand\file[1]{\texttt{\underline{#1}}}  % define in-line code formatting
 
 % Define code colours
@@ -134,9 +134,13 @@
 	pdfauthor={John L. Godlee}
 }
 
-% Rename sections when cross-linking
-\def\subsectionautorefname{section}
-\def\subsubsectionautorefname{section}
+% Rename autorefs to capitals
+\addto\extrasUKenglish{
+        \renewcommand{\chapterautorefname}{Chapter}%
+        \renewcommand{\sectionautorefname}{Section}%
+        \renewcommand{\subsectionautorefname}{Section}%
+        \renewcommand{\subsubsectionautorefname}{Section}%
+}
 
 \graphicspath{ {img/} }  % Define image path
 
@@ -157,7 +161,7 @@
 
 This document comprises a set of curated notes on using photographic methods to measure forest canopy structure. Much of the document has been informed by personal experience in the field, and is supported by references found throughout the forestry and ecology literature. 
 
-Canopy structure is highly variable within forests, being determined by species composition \citep{}, environment \citep{}, disturbance regime \citep{} etc. Canopy structure also has a large effect on ecosystem processes in forests. Leaf area is correlated with gross primary productivity of trees \citep{}. Tree canopies determine the light environment and micro-climate below the tree canopy \citep{}, with visible consequences for understorey biodiversity and community composition \citep{}. Measuring forest canopy structure is therefore of interest to foresters, community ecologists, conservation scientists, and others.
+Canopy structure is highly variable within forests, being determined by species composition, abiotic environment, disturbance regime etc \citep{Fotis2018}. Canopy structure also has a large effect on ecosystem processes in forests. Leaf area is correlated with gross primary productivity of trees \citep{Chen2012}. Tree canopies determine the light environment and micro-climate below the tree canopy, with consequences for understorey biodiversity and community composition \citep{Bartels2010, Barbier2008}. Measuring forest canopy structure is therefore of interest to foresters, community ecologists, conservation scientists, and others.
 
 There are myriad measures of canopy structure, each designed with a specific goal in mind. Forest canopies are a complex and multi-dimensional system. It is impossible to quantify every facet of canopy structure. Care must be taken to understand what the chosen measure of canopy structure is actually measuring, and whether this aligns with the needs of ones research question.
 
@@ -166,7 +170,7 @@ There are myriad measures of canopy structure, each designed with a specific goa
 \begin{itemize}
 	\item{Gap fraction - Proportional coverage of plant canopy material as viewed from a single point with some given angular field of view (\%), AKA site factor or canopy closure \citep{Anderson1964}.}
 	\item{Canopy cover - Proportional coverage of plant canopy material per unit ground area covered (\%).}
-	\item{Leaf/Plant Area Index (LAI/PAI) - Area of leaf (LAI) or plant (PAI) per unit ground area (m\textsuperscript{2} m\textsuperscript{-2}). LAI/PAI can be greater than 1 if leaves overlap.}
+	\item{Leaf/Plant Area Index (LAI/PAI) - Area of leaf (LAI) or plant (PAI) per unit ground area (m\textsuperscript{2} m\textsuperscript{-2}). LAI/PAI can be greater than 1 if leaves overlap. PAI includes non-leaf plant material like stems.}
 \end{itemize}
 
 \begin{figure}[H]
@@ -182,7 +186,7 @@ Hemispherical photography is a technique where forest canopy structure is measur
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=\textwidth]{hemi.jpg}
+	\includegraphics[width=0.5\textwidth]{hemi.jpg}
 	\caption{An example of a hemispherical photo of a miombo woodland canopy in Bicuar National Park, southwest Angola.}
 	\label{hemi}
 \end{figure}
@@ -191,7 +195,7 @@ Hemispherical photographs can be analysed in multiple ways to provide different 
 
 \subsection{Capturing informative hemispherical photos}
 
-Taking digital hemispherical photos under field conditions which are representative of the forest canopy requires careful balancing of camera settings. Alas, there is no convention or consensus on acquisition of hemispherical images or their analysis \citep{Beckschafer2013}. Measurements of gap fraction from hemispherical photographs are sensitive to camera exposure \citep{Macfarlane2000}, image processing \citep{Jonckheere2004}, and gamma correction \citep{Macfarlane2007 see Chianucci2019}. 
+Taking digital hemispherical photos under field conditions which are representative of the forest canopy requires careful balancing of camera settings. Alas, there is no convention or consensus on acquisition of hemispherical images or their analysis \citep{Beckschafer2013}. Measurements of gap fraction from hemispherical photographs are sensitive to camera exposure \citep{Macfarlane2000}, image processing \citep{Jonckheere2004}, and gamma correction \citep{Macfarlane2007a}. 
 
 Confident use of the many settings available on a modern DSLR camera is necessary to adjust for environmental conditions which may change throughout the day to gather consistent and informative images. Some common issues which create bias in results:
 
@@ -255,7 +259,7 @@ A daily kit list for taking hemispherical photos:
 	\item{Spirit level hotshoe attachment for camera}
 	\item{Compass}
 	\item{Notebook and pencil}
-	\item{GPS unit}
+	\item{Handheld GPS unit}
 	\item{Tape measure >2 m}
 	\item{Waterproof bag to cover camera}
 \end{itemize}
@@ -297,7 +301,7 @@ In a square plot where the goal is to understand the mean and variance of canopy
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=\textwidth]{hemi_layout}
+	\includegraphics[width=0.5\textwidth]{hemi_layout.drawio}
 	\caption{Diagram showing one possible layout for hemispherical photo locations within a 100x100 m square forest plot.}
 	\label{hemi_layout}
 \end{figure}
@@ -352,11 +356,11 @@ Photographic images were recorded using a Sigma 8 mm f/4 fisheye lens (Sigma Cor
 
 \subsection{Processing hemispherical photographs}
 
-There are many proprietary options for processing and analysing forest canopy structure from hemispherical photographs, e.g. WinScanopy \citep{WinScanopy}, CAN-EYE \citep{CAN-EYE}. I think processing with freely available tools is more flexible, reproducible, and future-proof, and should be preferred for academic research. This part of the guide demonstrates a workflow for processing hemispherical photos using ImageJ v1.x \citep{Schneider2012}.
+There are many proprietary options for processing and analysing forest canopy structure from hemispherical photographs, e.g. WinScanopy, CAN-EYE. I think processing with freely available tools is more flexible, reproducible, and future-proof, and should be preferred for academic research. This part of the guide demonstrates a workflow for processing hemispherical photos using ImageJ v1.x \citep{Schneider2012}.
 
 \subsubsection{Differentiating between plant and sky}
 
-In order to calculate various metrics of forest canopy structure, it is necessary to partition the hemispherical photo into areas of plant material and sky. A straightforward method for this relies on the assumption that the sky will be much brighter than the plant material. This is largely true for a correctly exposed hemispherical photo. The checklist below describes how to partition an image based on pixel brightness, in ImageJ. This process returns an image with white pixels for sky and black pixels for plant material. Monospace blue font refers to menu items in ImageJ to be selected.
+In order to calculate various metrics of forest canopy structure, it is necessary to partition the hemispherical photo into areas of plant material and sky. A straightforward method for this relies on the assumption that the sky will be much brighter than the plant material. This is largely true for a correctly exposed hemispherical photo. Note that in this process we are actually calculating PAI, rather than LAI. PAI included non-leaf plant material, as it is difficult to separate leaves from branches using photographic techniques. Bear in mind then, that the PAI will be an over-estimate of the true LAI. The checklist below describes how to partition an image based on pixel brightness, in ImageJ. This process returns an image with white pixels for sky and black pixels for plant material. Monospace blue font below refers to menu items in ImageJ to be selected.
 
 \begin{enumerate}
 	\item{Open ImageJ}
@@ -402,7 +406,7 @@ Sometimes, it's desirable to crop a hemispherical photo to a smaller circle with
 \end{itemize}
 
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{lens_proj}
+	\includegraphics[width=0.75\textwidth]{lens_proj}
 	\caption{Comparison of common fisheye lens projection functions.}
 	\label{lens_proj}
 \end{figure}
@@ -524,42 +528,44 @@ In the range from zero to about 60 zenith angle the canopy effects are more sign
 
 Measurements derived from hemispherical photography are highly sensitive to image acquisition and processing methods. Additionally, hemispherical photography equipment can be expensive.
 
-Digital Cover Photography (DCP) utilises flat images taken using a conventional camera lens. DCP was first used by \citet{Macfarlane2007a, Macfarlane2007b, Macfarlane2007c}. DCP has a higher sampling resolution closer to zenith, because the image is taken with a flat lens. This bias actually aligns somewhat with the importance of the canopy overhead for understorey light regime, and so isn't actually a big problem. DCP requires independent measurements of leaf inclination angle to estimate LAI, but can be more appropriate for estimating canopy cover in certain circumstances. Gap fraction cannot be measured directly with DCP, but it can be modelled using allometric equations if necessary.
+Digital Cover Photography (DCP) uses flat images taken using a conventional camera lens. DCP was first used by \citet{Macfarlane2007a}. DCP has a higher sampling resolution closer to zenith, because the image is taken with a flat lens. This bias actually aligns somewhat with the importance of the canopy overhead for understorey light regime, and so isn't actually a big problem. DCP requires independent measurements of leaf inclination angle to estimate LAI \citep{Ryu2010}, but can be more appropriate for estimating canopy cover in certain circumstances \citep{Pekin2009}. Gap fraction cannot be measured directly with DCP because gap fraction needs the full hemisphere, but it can be modelled using allometric equations if necessary.
 
 As a flat lens image will have a restricted field of view compared to a hemispherical photo, it may be necessary to increase sampling density within the area of forest of interest. 
 
 The process for estimating canopy cover with DCP is identical to the process for estimating gap fraction from a hemispherical photograph. Just follow the same instructions as in \autoref{gapfrac}.
 
-\section{Devices which measure PAR}
+\begin{figure}[H]
+	\includegraphics[width=0.6\linewidth]{dcp}
+	\caption{Example of a digital cover photo taken with a regular camera lens \citep{dcp2010}.}
+	\label{dcp}
+\end{figure}
 
-LiCOR LAI-2000
+\section{Alternatives to photography}
 
-AccuPAR LP-80 Ceptometer
+Some devices measure light intensity to estimate LAI. The AccuPAR LP-80 Ceptometer \citep{accupar2013} has a long ``wand'' with many PAR (Photosynthetically Active Radiation) sensors along its length, which are used in conjunction with an external PAR sensor designed to be held outside the canopy as a reference value, to estimate LAI using equations which take into account direct incident light, and light scattered by canopy material \citep{Goudriaan1988}. The LiCOR LAI-2000 \citep{lai2000, Cutini1998} uses a fisheye light sensor to measure diffuse radiation in five concentric rings. As with the LP-80, a reference value above the canopy is also taken so that gap fraction can be estimated as the ratio between the above and below canopy gap fraction readings. 
 
-A device operating on a similar principle to hemispherical photography, which processes an image and provides a percentage canopy cover estimate. Measurements are paired with replicates taken simultaneously under an open sky to normalise changing light conditions \citep{Gower1991}.
+Terrestrial or airborne Light-Detection And Ranging (LiDAR) equipment can be used to estimate canopy cover and the vertical distribution of canopy material. Equipment is expensive and processing is complex, but this method is currently the most precise and accurate \citep{Seidel2011} way to measure gap fraction, canopy cover, and LAI, as it uses an active radiation source, rather than the sun, to detect canopy gaps. 
 
-\section{LiDAR}
+Periscope densitometers are a simple way to estimate canopy cover across an area. A simple periscope tube with a mirror is marked with a cross. The periscope is pointed upwards and the operator records the presence or absence of plant material in the centre of the cross. A dense grid of measurements is recorded which can then be converted to a percentage canopy cover \citep{GRS}. As the data is binary, it is very straightforward to estimate the uncertainty of the canopy cover estimate given the density of points across the area. If you are only interested in canopy cover and not in LAI or gap fraction, a periscope densitometer is a good method, as is digital cover photography.
 
-Terrestrial or airborne Light-Detection And Ranging equipment can be used to estimate canopy cover and the vertical distribution of canopy cover. Equipment is expensive and processing is complex, but this method is currently the most precise and accurate \citep{Seidel2011}.
+\begin{figure}[H]
+	\includegraphics[width=0.5\linewidth]{periscope_densitometer}
+	\caption{A periscope densitometer, manufactured by \citet{GRS}.}
+	\label{periscope_densitometer}
+\end{figure}
 
-\section{Periscope densitometer}
+Reflective dish densitometers used to be the industry standard in forestry for estimating gap fraction. A concave mirror surface is divided into a grid to facilitate the estimation of the percentage of sky covered by plant material \citep{Lemmon1956}. This method, while previously commonplace in ecology and forestry, is now not recommended, as it has been shown that large recording biases can occur, even when measurements are taken by a trained operator \citep{Korhonen2006}.
 
-A simple periscope tube is marked with a cross. The periscope is pointed upwards and the operator records the presence or absence of plant material in the centre of the cross. A dense grid of measurements is taken which can then be converted to a percentage canopy cover \citep{GRS}.
+\begin{figure}[H]
+	\includegraphics[width=0.5\linewidth]{disco_densitometer}
+	\caption{A reflective dish densitometer, affectionately referred to as a ``disco ball''.}
+	\label{disco_densitometer}
+\end{figure}
 
-\section{Reflective dish densitometer}
+In a deciduous forest canopy with clear seasonal leaf growth and senescence, it is possible to estimate LAI simply by collecting leaves after they fall from the tree. A leaf trap of known dimensions is left on the forest floor for a known period of time to capture falling leaves. The area of these individual leaves is measured to estimate the total leaf area of the canopy. This method has an advantage over many indirect methods in that it can easily separate woody material from leaf material to give the true LAI, rather than the Plant Area Index (PAI). 
 
-A concave mirror surface is divided into a grid to facilitate the estimation of the percentage of sky covered by plant material \citep{Lemmon1956}. This method, while previously commonplace in ecology and forestry, is now not recommended, as it has been shown that large recording biases can occur, even when measurements are taken by a trained operator \citep{Korhonen2006}.
-
-\section{Leaf collection}
-
-A leaf trap of known dimensions is left on the forest floor for a known period of time to capture falling leaves. The area of these individual leaves is measured to estimate the total leaf area of the canopy, assuming a constant rate of leaf fall. Only works in forests with a distinct senescence period.
-
-\section{Manual harvesting}
-
-Branches within a known area of canopy are harvested and the leaves removed. The area of the individual leaves is measured to directly measure the total leaf area of the canopy.
+Direct leaf harvesting can be conducted by removing branches within a known area of canopy and stripping the leaves. The area of the individual leaves is then measured to directly measure the total leaf area of the canopy. This method is destructive and laborious, and so is rarely used, but does provide the most accurate measure of LAI.
 
 \printbibliography
 
 \end{document}
-
-% Update hemispherical photography manual - the benefit of using hemispherical photos is bein able to calculate LAI, and also in understanding PAR at ground level at a single point. If you're just interested in canopy cover, then use a periscope densitometer or a flat square lens, like on a mobile phone
