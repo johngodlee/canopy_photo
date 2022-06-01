@@ -1,9 +1,8 @@
 // START user input
 ///////////////////////////////////
-input = "/Users/username/Desktop/input/";
-output = "/Users/username/Desktop/output/";
+input = "/Users/user/input/";
+output = "/Users/user/output/";
 circle_diam = 3925
-algorithm = "Default"
 ///////////////////////////////////
 // END user input
 
@@ -18,6 +17,7 @@ for (i=0; i<(list.length); i++) {
 		circle_diam,
 		circle_diam);
 	file_name = getInfo("image.filename");
+	run("Invert LUT");
 	run("Analyze Particles...", "summarize");
 	image_id = getImageID();
 	selectImage(image_id);

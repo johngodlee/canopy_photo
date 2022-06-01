@@ -4,7 +4,8 @@
 
 # Packages
 library(tiff)
-source("Hemiphot-master/Hemiphot.R")
+library(devtools)
+source_url("https://raw.githubusercontent.com/naturalis/Hemiphot/master/Hemiphot.R")
 source("fov_func.R")
 
 # Load images
@@ -13,14 +14,14 @@ img_file_list <- list.files("test_img", pattern = ".tif", full.names = TRUE)
 img_list <- lapply(img_file_list, readTIFF)
 
 # Create empty dataframe for results, filled with zeroes 
-all_data <- data.frame(matrix(data = 0, nrow = length(img_list), ncol = 7))
-names(all_data) = c("File", "CanOpen", "LAI", "DirectAbove", "DiffAbove",
+out <- data.frame(matrix(data = 0, nrow = length(img_list), ncol = 7))
+names(out) = c("File", "CanOpen", "LAI", "DirectAbove", "DiffAbove",
   "DirectBelow", "DiffBelow")
 
 # Fill first column with image names
-all_data[,1] = img_file_list 
+out[,1] = img_file_list 
 
-# Define parameters
+# Define location and time parameters
 location.latitude <- -15
 location.altitude <- 200
 location.day <- 30
@@ -49,10 +50,10 @@ for(i in 1:length(img_file_list)){
   image <- SetCircle(image, cx = location.cx, cy = location.cy, cr = location.cr)
   
   gap.fractions <- CalcGapFractions(image)
-  all_data[i,2] = CalcOpenness(fractions = gap.fractions)
+  out[i,2] = CalcOpenness(fractions = gap.fractions)
   
   # calculate LAI according to Licor's LAI Analyzer 
-  all_data[i,3] = CalcLAI(fractions = gap.fractions)
+  out[i,3] = CalcLAI(fractions = gap.fractions)
   
   # Photosynthetic Photon Flux Density (PPDF, umol m-1 s-1) P
   rad <- CalcPAR.Day(im = image,
@@ -60,11 +61,11 @@ for(i in 1:length(img_file_list)){
     tau = location.tau, uoc = location.uoc, 
     draw.tracks = F, full.day = F)
 
-  all_data[i,4] = rad[1]
-  all_data[i,5] = rad[2]
-  all_data[i,6] = rad[3]
-  all_data[i,7] = rad[4]
+  out[i,4] = rad[1]
+  out[i,5] = rad[2]
+  out[i,6] = rad[3]
+  out[i,7] = rad[4]
 }
 
 # Look at the output
-all_data
+out
